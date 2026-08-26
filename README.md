@@ -1,6 +1,6 @@
 # Earn Extra Online — Real, Boring Systems
 
-Honest, hype-free affiliate marketing site. South African audience.
+Honest, hype-free affiliate marketing site. International audience.
 ClickBank + direct affiliate programs.
 
 ## Structure
@@ -12,18 +12,17 @@ earn-online/
 ├── guide.html        — Free traffic guide (SEO, YouTube, Pinterest, forums)
 ├── contract.md       — Design & tone contract
 ├── assets/
-│   ├── styles.css    — Dark/muted theme
-│   └── sa-flag.svg   — Official SA flag (Wikimedia)
+│   └── styles.css    — Dark/muted theme
 └── .gitignore
 ```
 
 ## Design Contract
 
 See `contract.md`. Key rules:
-- Dark/dimmed UI theme — no bright colours, no green gradients
-- Real SA flag hero (Wikimedia SVG)
-- No SA flag emoji in text — use 💪 for buttons/footer accents
-- Tone: blunt, direct, patriotic SA
+- Dark/dimmed UI theme — no bright colours
+- No country flags — international audience
+- No flag emoji in text — use 💪 for buttons/footer accents
+- Tone: blunt, direct, honest, international
 - No weasel wording ("some"/"most"/"fewer than X")
 - Use "freedom" not "democracy"
 - Never invent numbers — if untested, say so

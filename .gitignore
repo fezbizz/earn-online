@@ -5,3 +5,6 @@ node_modules/
 .env
 .vscode/
 .idea/
+__pycache__/
+*.pyc
+offers_cache.json
