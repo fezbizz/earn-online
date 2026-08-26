@@ -80,6 +80,8 @@ def main():
     print(f"{'='*50}")
     subprocess.run(["git", "add", "-A"], cwd=SCRIPT_DIR)
     commit_msg = f"Auto-update: {('Category: ' + args.category) if args.category else 'All categories'} — {args.limit} offers pulled"
+    subprocess.run(["git", "branch", "-M", "main"], cwd=SCRIPT_DIR,
+                  capture_output=True, text=True)
     result = subprocess.run(["git", "commit", "-m", commit_msg], cwd=SCRIPT_DIR,
                             capture_output=True, text=True)
     print(result.stdout)
