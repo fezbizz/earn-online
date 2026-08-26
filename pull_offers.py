@@ -1,20 +1,18 @@
 """
-ClickBank API Auto-Pull Script
-==============================
-Fetches ClickBank Marketplace offers via the ClickBank API, filters them by
-category, sorts by commission/EPC, and saves the top offers to a JSON cache.
+ClickBank Marketplace Auto-Pull Script
+========================================
+Fetches ClickBank Marketplace offers via the public GraphQL endpoint
+(no API key required — this is the same endpoint the ClickBank marketplace
+UI uses at accounts.clickbank.com/marketplace.htm).
 
-The script is designed to run standalone or be called by the review generator.
-
-ClickBank API auth: HTTP Basic auth with the API key as username and a
-colon-appended key. The key must NOT be a "Bearer" token — ClickBank uses
-Basic auth with the developer key only.
+Pulls all offers, filters by category (optional), sorts by a weighted score
+(commission + EPC + gravity), and saves the top offers to a JSON cache.
 
 Usage:
-    python pull_offers.py                  # Pull all categories, top 20 per category
-    python pull_offers.py --category "Health & Fitness"  # Pull specific category
-    python pull_offers.py --limit 50       # Pull top 50 offers
-    python pull_offers.py --dry-run        # Show what would be fetched without writing
+    python pull_offers.py                  # Pull all offers, top 20
+    python pull_offers.py --category "Health & Fitness"
+    python pull_offers.py --limit 50
+    python pull_offers.py --dry-run         # Show results without writing cache
 
 Requirements:
     pip install requests
@@ -24,20 +22,74 @@ import os
 import sys
 import json
 import argparse
-import base64
 from datetime import datetime
 from pathlib import Path
 
-# --- Config ---
 SCRIPT_DIR = Path(__file__).parent
 ENV_PATH = SCRIPT_DIR / ".env"
 CACHE_PATH = SCRIPT_DIR / "offers_cache.json"
+GRAPHQL_URL = "https://accounts.clickbank.com/graphql"
 
-CLICKBANK_API_BASE = "https://api.clickbank.com/rest/1.3"
+GRAPHQL_QUERY = """
+query ($parameters: MarketplaceSearchParameters!) {
+  marketplaceSearch(parameters: $parameters) {
+    totalHits
+    offset
+    hits {
+      site
+      title
+      description
+      url
+      urlTitle
+      urlDescription
+      marketplaceStats {
+        activateDate
+        category
+        subCategory
+        initialDollarsPerSale
+        averageDollarsPerSale
+        gravity
+        totalRebill
+        de
+        en
+        es
+        fr
+        it
+        pt
+        standard
+        physical
+        rebill
+        upsell
+        standardUrlPresent
+        mobileEnabled
+        whitelistVendor
+        cpaVisible
+        dollarTrial
+        hasAdditionalSiteHoplinks
+        directTracking
+        expectedReturnRate
+        returnRateSource
+        initialEPC
+        futureEPC
+        averageEPC
+        conversionRate
+        netEPC
+        biGravity
+        score
+        rank
+        sellerVolume
+      }
+      affiliateToolsUrl
+      affiliateSupportEmail
+      offerImageUrl
+    }
+  }
+}
+"""
 
 
 def load_env():
-    """Load API key from .env file — never hardcode, never echo."""
+    """Load config from .env file."""
     env = {}
     if ENV_PATH.exists():
         with open(ENV_PATH, encoding="utf-8") as f:
@@ -46,116 +98,10 @@ def load_env():
                 if line and not line.startswith("#") and "=" in line:
                     k, v = line.split("=", 1)
                     env[k.strip()] = v.strip()
-    # Also check environment variables (override)
-    for key in ["CLICKBANK_API_KEY", "CLICKBANK_NICKNAME", "CLICKBANK_CLERK_KEY"]:
+    for key in ["CLICKBANK_API_KEY", "CLICKBANK_NICKNAME"]:
         if os.environ.get(key):
             env[key] = os.environ[key]
     return env
-
-
-def make_auth_header(api_key):
-    """
-    ClickBank uses HTTP Basic auth.
-    The format is: base64(api_key + ":")
-    NOT "Bearer <key>" — that's what caused the 401 on the phone.
-    """
-    credentials = base64.b64encode(f"{api_key}:".encode()).decode()
-    return {
-        "Authorization": f"Basic {credentials}",
-        "Accept": "application/json",
-        "User-Agent": "EarnOnline/1.0",
-    }
-
-
-def fetch_category_list(api_key, headers):
-    """Fetch all available ClickBank marketplace categories."""
-    import requests
-    url = f"{CLICKBANK_API_BASE}/marketplace/categories"
-    resp = requests.get(url, headers=headers, timeout=30)
-    if resp.status_code == 401:
-        print("ERROR 401: Auth failed. Check your API key in .env")
-        print("ClickBank uses Basic auth with base64(key + ':'), NOT Bearer.")
-        print("Also check: ClickBank may require IP allowlisting in account settings.")
-        sys.exit(1)
-    resp.raise_for_status()
-    return resp.json()
-
-
-def fetch_marketplace_offers(api_key, headers, category=None, page=1, max_results=100):
-    """
-    Fetch marketplace offers from ClickBank API.
-    Endpoint: /marketplace/search
-    """
-    import requests
-    url = f"{CLICKBANK_API_BASE}/marketplace/search"
-    params = {
-        "pageNumber": page,
-        "maxResults": max_results,
-    }
-    if category:
-        params["category"] = category
-
-    resp = requests.get(url, headers=headers, params=params, timeout=30)
-    if resp.status_code == 401:
-        print("ERROR 401: Auth failed. Check your API key in .env")
-        print("ClickBank uses Basic auth with base64(key + ':'), NOT Bearer.")
-        sys.exit(1)
-    if resp.status_code == 403:
-        print("ERROR 403: Forbidden. Your ClickBank account may need IP allowlisting.")
-        print("Go to: accounts.clickbank.com > Settings > IP Scoping")
-        print(f"Your current public IP needs to be allowlisted.")
-        sys.exit(1)
-    resp.raise_for_status()
-    return resp.json()
-
-
-def normalize_offer(raw):
-    """
-    Extract the fields we care about from a ClickBank API response.
-    Handles different API response shapes gracefully.
-    """
-    return {
-        "title": raw.get("title", raw.get("site", "Unknown")),
-        "site": raw.get("site", ""),
-        "category": raw.get("category", raw.get("siteCategory", "Unknown")),
-        "description": raw.get("description", ""),
-        "commission": raw.get("commission", raw.get("affiliateCommission", 0)),
-        "commission_percent": raw.get("commissionPercent", raw.get("affiliateCommissionPercentage", 0)),
-        "epc": raw.get("epc", raw.get("averageEarningsPerClick", 0)),
-        "gravity": raw.get("gravity", 0),
-        "has_recurring": raw.get("hasRecurringProducts", raw.get("recurring", False)),
-        "activation_fee": raw.get("activationFee", ""),
-        "require_approval": raw.get("requireApproval", False),
-        "total_rebill": raw.get("totalRebillAmmount", raw.get("totalRebillAmount", 0)),
-        "initial_commission": raw.get("initialCommission", raw.get("commission", 0)),
-        "future_commission": raw.get("futureCommission", raw.get("totalRebillAmmount", 0)),
-        "vendor_url": raw.get("vendor", raw.get("vendorUrl", "")),
-        "image_url": raw.get("image", raw.get("imageUrl", "")),
-        "marketplace_url": raw.get("marketplaceAffiliateUrl", ""),
-        "fetched_at": datetime.now().isoformat(),
-    }
-
-
-def score_offer(offer):
-    """
-    Score an offer by commission size, EPC, and gravity.
-    Higher = better. This is a simple weighted score, not a sophisticated model.
-
-    Weights:
-        - Commission: 40% (bigger payouts = more income per sale)
-        - EPC: 40% (proven conversion = less risk)
-        - Gravity: 20% (more affiliates earning = offer converts)
-    """
-    commission = float(offer.get("commission", 0) or 0)
-    epc = float(offer.get("epc", 0) or 0)
-    gravity = float(offer.get("gravity", 0) or 0)
-
-    # Normalize: commission on scale of $0-$200, EPC $0-$10, gravity 0-500
-    comm_score = min(commission / 200.0, 1.0)
-    epc_score = min(epc / 10.0, 1.0)
-    grav_score = min(gravity / 500.0, 1.0)
-
-    return (comm_score * 0.4) + (epc_score * 0.4) + (grav_score * 0.2)
 
 
 def generate_hoplink(nickname, site):
@@ -165,99 +111,164 @@ def generate_hoplink(nickname, site):
     return f"https://{nickname}.hop.clickbank.net/?vendor={site}"
 
 
+def fetch_offers(category=None):
+    """Fetch offers from ClickBank public GraphQL endpoint."""
+    import requests
+
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "Accept": "application/json",
+        "Content-Type": "application/json",
+        "Origin": "https://accounts.clickbank.com",
+        "Referer": "https://accounts.clickbank.com/marketplace.htm",
+    }
+
+    parameters = {}
+    if category:
+        parameters["category"] = category
+
+    resp = requests.post(
+        GRAPHQL_URL,
+        json={"query": GRAPHQL_QUERY, "variables": {"parameters": parameters}},
+        headers=headers,
+        timeout=45,
+    )
+
+    if resp.status_code != 200:
+        print(f"ERROR: HTTP {resp.status_code} from ClickBank GraphQL")
+        print(f"  Body: {resp.text[:300]}")
+        sys.exit(1)
+
+    data = resp.json()
+    if "errors" in data:
+        print("ERROR: GraphQL returned errors:")
+        for e in data["errors"]:
+            print(f"  {e.get('message', e)}")
+        sys.exit(1)
+
+    search_results = data["data"]["marketplaceSearch"]
+    return search_results
+
+
+def normalize_offer(raw):
+    """Extract the fields we care about from a GraphQL response hit."""
+    stats = raw.get("marketplaceStats", {})
+    return {
+        "title": raw.get("title", "Unknown"),
+        "site": raw.get("site", ""),
+        "category": stats.get("category", "Unknown"),
+        "sub_category": stats.get("subCategory", ""),
+        "description": raw.get("description", ""),
+        "url": raw.get("url", ""),
+        "commission": float(stats.get("averageDollarsPerSale", 0) or 0),
+        "initial_commission": float(stats.get("initialDollarsPerSale", 0) or 0),
+        "future_commission": float(stats.get("totalRebill", 0) or 0),
+        "average_dollars_per_sale": float(stats.get("averageDollarsPerSale", 0) or 0),
+        "epc": float(stats.get("averageEPC", 0) or 0),
+        "initial_epc": float(stats.get("initialEPC", 0) or 0),
+        "future_epc": float(stats.get("futureEPC", 0) or 0),
+        "net_epc": float(stats.get("netEPC", 0) or 0),
+        "gravity": float(stats.get("gravity", 0) or 0),
+        "bi_gravity": float(stats.get("biGravity", 0) or 0),
+        "conversion_rate": float(stats.get("conversionRate", 0) or 0),
+        "has_recurring": float(stats.get("totalRebill", 0) or 0) > 0,
+        "has_upsell": bool(stats.get("upsell", False)),
+        "is_physical": bool(stats.get("physical", False)),
+        "whitelist_vendor": bool(stats.get("whitelistVendor", False)),
+        "cpa_visible": bool(stats.get("cpaVisible", False)),
+        "has_trial": bool(stats.get("dollarTrial", False)),
+        "mobile_enabled": bool(stats.get("mobileEnabled", False)),
+        "seller_volume": float(stats.get("sellerVolume", 0) or 0),
+        "rank": int(stats.get("rank", 0) or 0),
+        "score_raw": float(stats.get("score", 0) or 0),
+        "affiliate_tools_url": raw.get("affiliateToolsUrl", ""),
+        "offer_image_url": raw.get("offerImageUrl", ""),
+        "fetched_at": datetime.now().isoformat(),
+    }
+
+
+def score_offer(offer):
+    """
+    Score an offer: commission (40%), EPC (40%), gravity (20%).
+    Higher = better.
+    """
+    commission = offer.get("commission", 0)
+    epc = offer.get("epc", 0)
+    gravity = offer.get("gravity", 0)
+
+    comm_score = min(commission / 200.0, 1.0)
+    epc_score = min(epc / 250.0, 1.0)
+    grav_score = min(gravity / 500.0, 1.0)
+
+    return (comm_score * 0.4) + (epc_score * 0.4) + (grav_score * 0.2)
+
+
 def pull_offers(category=None, limit=20, dry_run=False):
     """Main pull function."""
     env = load_env()
-    api_key = env.get("CLICKBANK_API_KEY", "")
     nickname = env.get("CLICKBANK_NICKNAME", "")
-
-    if not api_key or "paste-your" in api_key.lower():
-        print("ERROR: No ClickBank API key found.")
-        print("Create a .env file with: CLICKBANK_API_KEY=your-key-here")
-        print("Get your key from: https://accounts.clickbank.com/accounts/manageAPIKeys")
-        sys.exit(1)
 
     if not nickname or "your-clickbank" in nickname.lower():
         print("WARNING: No ClickBank nickname set in .env.")
         print("Hoplinks will be empty until you set CLICKBANK_NICKNAME")
         nickname = ""
 
-    headers = make_auth_header(api_key)
-    print(f"Fetching ClickBank marketplace offers...")
+    print("Fetching ClickBank marketplace offers...")
     if category:
-        print(f"  Category: {category}")
-    print(f"  Limit: {limit}")
+        print(f"  Category filter: {category}")
 
     try:
-        import requests
-    except ImportError:
-        print("ERROR: 'requests' package not installed.")
-        print("Install it: pip install requests")
+        results = fetch_offers(category=category)
+    except Exception as e:
+        print(f"ERROR: {e}")
         sys.exit(1)
 
-    try:
-        raw_data = fetch_marketplace_offers(api_key, headers, category=category, max_results=limit)
-    except requests.exceptions.ConnectionError:
-        print("ERROR: Cannot connect to ClickBank API. Check your internet connection.")
-        sys.exit(1)
-    except requests.exceptions.Timeout:
-        print("ERROR: ClickBank API timed out. Try again.")
-        sys.exit(1)
+    total_hits = results.get("totalHits", 0)
+    raw_hits = results.get("hits", [])
+    print(f"  Total offers available: {total_hits}")
+    print(f"  Offers fetched: {len(raw_hits)}")
 
-    # Parse response — ClickBank API returns different shapes
-    offers_raw = []
-    if isinstance(raw_data, dict):
-        offers_raw = raw_data.get("offers", raw_data.get("results", raw_data.get("data", [])))
-    elif isinstance(raw_data, list):
-        offers_raw = raw_data
-
-    if not offers_raw:
-        print("No offers returned from ClickBank API.")
-        print("This could mean:")
-        print("  - The category name doesn't match ClickBank's internal names")
-        print("  - Your account doesn't have marketplace access")
-        print("  - API response format changed")
-        print(f"\nRaw response keys: {list(raw_data.keys()) if isinstance(raw_data, dict) else type(raw_data)}")
+    if not raw_hits:
+        print("No offers returned.")
         sys.exit(0)
 
-    # Normalize + score
-    offers = [normalize_offer(o) for o in offers_raw]
+    offers = [normalize_offer(h) for h in raw_hits]
     for o in offers:
         o["score"] = score_offer(o)
         o["hoplink"] = generate_hoplink(nickname, o.get("site", ""))
 
-    # Sort by score descending
     offers.sort(key=lambda x: x["score"], reverse=True)
 
-    print(f"\nFetched {len(offers)} offers. Top 5 by score:")
-    for i, o in enumerate(offers[:5], 1):
-        print(f"  {i}. {o['title']} — ${o['commission']} comm, ${o['epc']} EPC, score={o['score']:.2f}")
+    top = offers[:limit]
+    print(f"\nTop {len(top)} offers by score:")
+    for i, o in enumerate(top[:10], 1):
+        print(f"  {i}. {o['title'][:50]}")
+        print(f"     ${o['commission']:.2f} comm, ${o['epc']:.2f} EPC, grav={o['gravity']:.1f}, score={o['score']:.3f}")
 
     if dry_run:
-        print("\n--dry-run: Not writing cache file.")
-        return offers
+        print(f"\n--dry-run: Not writing cache file.")
+        return top
 
-    # Save to cache
     cache = {
         "fetched_at": datetime.now().isoformat(),
         "category": category or "all",
-        "count": len(offers),
-        "offers": offers,
+        "total_available": total_hits,
+        "count": len(top),
+        "offers": top,
     }
     with open(CACHE_PATH, "w", encoding="utf-8") as f:
         json.dump(cache, f, indent=2)
-    print(f"\nSaved {len(offers)} offers to {CACHE_PATH}")
-
-    return offers
+    print(f"\nSaved {len(top)} offers to {CACHE_PATH}")
+    return top
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Pull ClickBank marketplace offers")
     parser.add_argument("--category", type=str, default=None,
-                        help="ClickBank category name (e.g. 'Health & Fitness')")
+                        help="ClickBank category (e.g. 'Health & Fitness')")
     parser.add_argument("--limit", type=int, default=20,
-                        help="Max offers to fetch (default: 20)")
+                        help="Max offers to save to cache (default: 20)")
     parser.add_argument("--dry-run", action="store_true",
-                        help="Show results without writing cache file")
+                        help="Show results without writing cache")
     args = parser.parse_args()
     pull_offers(category=args.category, limit=args.limit, dry_run=args.dry_run)
