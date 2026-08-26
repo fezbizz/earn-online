@@ -69,6 +69,14 @@ def main():
     if not run(gen_cmd, "STEP 2: Generate review.html"):
         sys.exit(1)
 
+    # Step 2b: Generate product review pages
+    pages_cmd = [py, "generate_product_pages.py", "--top", str(args.top)]
+    run(pages_cmd, "STEP 2b: Generate product review pages")
+
+    # Step 2c: Generate SEO articles
+    articles_cmd = [py, "generate_articles.py", "--type", "all", "--limit", str(args.limit)]
+    run(articles_cmd, "STEP 2c: Generate SEO articles")
+
     if args.dry_run:
         print("\n--dry-run: Skipping git commit.")
         print("Done. review.html has been regenerated.")

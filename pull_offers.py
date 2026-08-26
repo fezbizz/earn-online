@@ -203,6 +203,37 @@ def score_offer(offer):
     return (comm_score * 0.4) + (epc_score * 0.4) + (grav_score * 0.2)
 
 
+QUALITY_CATEGORIES = {
+    "Health & Fitness",
+    "Self-Help",
+    "E-business & E-marketing",
+    "Spirituality, New Age & Alternative Beliefs",
+    "Green Products",
+}
+
+# Blacklist keywords in product titles — hype, novelty, political, or low-quality
+TITLE_BLACKLIST = [
+    "trump", "badge", "pin", "lapel", "golden badge",
+    "pharaoh", "nectar", "ormus", "gold ormus",
+    "pineal", "activation",
+]
+
+
+def is_quality_offer(offer):
+    """Filter out junk offers — keep only quality niches with real data."""
+    cat = offer.get("category", "")
+    if cat not in QUALITY_CATEGORIES:
+        return False
+    title = offer.get("title", "").lower()
+    for bad in TITLE_BLACKLIST:
+        if bad in title:
+            return False
+    # Must have some commission data
+    if float(offer.get("commission", 0) or 0) < 10:
+        return False
+    return True
+
+
 def pull_offers(category=None, limit=20, dry_run=False):
     """Main pull function."""
     env = load_env()
@@ -233,6 +264,12 @@ def pull_offers(category=None, limit=20, dry_run=False):
         sys.exit(0)
 
     offers = [normalize_offer(h) for h in raw_hits]
+
+    # Filter to quality offers only
+    pre_count = len(offers)
+    offers = [o for o in offers if is_quality_offer(o)]
+    print(f"  Filtered: {pre_count} → {len(offers)} quality offers (removed {pre_count - len(offers)} junk)")
+
     for o in offers:
         o["score"] = score_offer(o)
         o["hoplink"] = generate_hoplink(nickname, o.get("site", ""))
