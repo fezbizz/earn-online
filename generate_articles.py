@@ -758,6 +758,420 @@ HOWTO_ARTICLES = [
 
   <p><a href="../review.html" class="btn">Compare EPC data 💪</a></p>""",
     },
+    {
+        "slug": "how-to-write-affiliate-review-that-ranks",
+        "title": "How to Write an Affiliate Review That Actually Ranks on Google",
+        "meta_desc": "Step-by-step guide to writing affiliate reviews that rank on Google and convert readers into buyers. Real structure, real examples, no fluff.",
+        "keywords": "how to write affiliate review, affiliate review template, write product review SEO, affiliate review that ranks, review article structure",
+        "content": """  <p>
+    Writing an affiliate review that ranks on Google isn't about being a great
+    writer. It's about structure, honesty, and giving Google what it wants.
+    Here's the exact structure that works.
+  </p>
+
+  <h2>The structure</h2>
+  <ol>
+    <li><strong>Title:</strong> "[Product Name] Review — Does It Actually Work?" This targets the exact search term people type.</li>
+    <li><strong>Intro (100 words):</strong> State what the product is and that you'll give an honest review. No hype.</li>
+    <li><strong>What it is (150 words):</strong> Describe the product plainly. What does it do? Who is it for?</li>
+    <li><strong>The numbers (table):</strong> Commission, EPC, gravity. Real data from ClickBank.</li>
+    <li><strong>Strengths (bullet list):</strong> 3-5 honest strengths based on the data.</li>
+    <li><strong>Weaknesses (bullet list):</strong> 3-5 honest weaknesses. This is what makes Google trust you.</li>
+    <li><strong>Verdict (100 words):</strong> Should you promote it? Straight answer.</li>
+    <li><strong>How to promote it (150 words):</strong> Link to your traffic guide.</li>
+    <li><strong>CTA button:</strong> Your affiliate link.</li>
+  </ol>
+
+  <h2>Why this works</h2>
+  <p>
+    Google's algorithm rewards pages that answer questions honestly. The
+    weaknesses section is what separates your review from the 50 other
+    "reviews" that are just sales pages. Google can tell the difference —
+    and so can readers.
+  </p>
+
+  <h2>What to avoid</h2>
+  <ul>
+    <li>Don't copy the vendor's sales page. Google penalizes duplicate content.</li>
+    <li>Don't write 3000 words of fluff. 800-1500 words of substance beats 3000 of padding.</li>
+    <li>Don't hide your affiliate link. Put it naturally where the product is mentioned.</li>
+    <li>Don't forget the weaknesses. If you only list strengths, Google sees it as promotional, not helpful.</li>
+  </ul>
+
+  <p>See real examples on our <a href="../review.html">reviews page</a> — every one follows this structure.</p>
+
+  <p><a href="../review.html" class="btn">See real review examples 💪</a></p>""",
+    },
+    {
+        "slug": "what-is-gravity-score-clickbank-explained",
+        "title": "What Is Gravity Score on ClickBank? (Simple Explanation for Beginners)",
+        "meta_desc": "ClickBank gravity score explained simply. What it means, what a good gravity score is, and why it matters for choosing affiliate offers.",
+        "keywords": "what is gravity score clickbank, clickbank gravity explained, gravity score meaning, good gravity score clickbank, affiliate gravity",
+        "content": """  <p>
+    Gravity is one of the most confusing numbers on ClickBank. Here's the
+    simple explanation — no jargon, no math.
+  </p>
+
+  <h2>What gravity means</h2>
+  <p>
+    Gravity = how many different affiliates earned a commission on this
+    product in the last 12 weeks. Higher gravity means more affiliates are
+    making money with it.
+  </p>
+
+  <h2>What's a good gravity score?</h2>
+  <table>
+    <tr><th>Gravity</th><th>What It Means</th></tr>
+    <tr><td>0</td><td>No affiliates earning. Unproven or dead.</td></tr>
+    <tr><td>1-20</td><td>Low traction. Few affiliates testing it. Higher risk, less competition.</td></tr>
+    <tr><td>20-100</td><td>Solid. Many affiliates earning consistently. Safe to promote.</td></tr>
+    <tr><td>100-300</td><td>Hot. Very popular offer. Proven to convert, but more competition.</td></tr>
+    <tr><td>300+</td><td>Saturated. Lots of affiliates promoting it. Harder to stand out.</td></tr>
+  </table>
+
+  <h2>High vs low gravity — which is better?</h2>
+  <p>
+    It depends on your strategy:
+  </p>
+  <ul>
+    <li><strong>High gravity (100+):</strong> Proven to convert. Many affiliates earn. But you compete with all of them. Good for beginners — the offer works, you just need traffic.</li>
+    <li><strong>Low gravity (10-50):</strong> Less competition. If the EPC is good, this can be a hidden gem. Riskier but potentially more profitable per click.</li>
+    <li><strong>Zero gravity:</strong> Avoid unless you have a specific reason. No data means no proof.</li>
+  </ul>
+
+  <h2>Gravity + EPC = the winning combo</h2>
+  <p>
+    Gravity alone isn't enough. An offer with gravity 500 but EPC $0.10 is
+    worse than gravity 30 with EPC $5. Always check both numbers together.
+    Our <a href="../review.html">reviews page</a> shows both for every offer.
+  </p>
+
+  <div class="callout">
+    <strong>Important:</strong> Gravity is weighted — more recent sales count
+    more. So gravity 50 means ~50 affiliates earned recently, not 12 weeks ago.
+    It's a freshness indicator, not a lifetime total.
+  </div>
+
+  <p><a href="../review.html" class="btn">Compare gravity scores 💪</a></p>""",
+    },
+    {
+        "slug": "affiliate-marketing-without-website",
+        "title": "Can You Do Affiliate Marketing Without a Website? (Honest Answer)",
+        "meta_desc": "Can you earn with affiliate marketing without a website? Yes, but there are trade-offs. Real methods, real limitations, no hype.",
+        "keywords": "affiliate marketing without website, no website affiliate, affiliate marketing free, affiliate without site, earn money affiliate no website",
+        "content": """  <p>
+    Short answer: Yes, you can do affiliate marketing without a website. But
+    it's harder, less stable, and limits your options. Here's the honest
+    breakdown.
+  </p>
+
+  <h2>Methods that work without a website</h2>
+
+  <h3>1. YouTube</h3>
+  <p>
+    Put your affiliate link in the video description. YouTube is the second
+    largest search engine — videos rank fast. This is the best no-website
+    method. You can do it faceless with screen recordings and AI voiceover.
+  </p>
+
+  <h3>2. Pinterest</h3>
+  <p>
+    Pin images with your affiliate link directly. Pinterest allows affiliate
+    links. Works best for visual niches (health, fitness, lifestyle).
+  </p>
+
+  <h3>3. Medium.com</h3>
+  <p>
+    Write articles on Medium with your affiliate link. Medium has built-in
+    traffic and domain authority. But you don't own the platform — they can
+    change rules anytime.
+  </p>
+
+  <h3>4. Quora</h3>
+  <p>
+    Answer questions and link to your affiliate offer when relevant. Don't
+    spam — Quora bans fast. But one good answer can drive traffic for years.
+  </p>
+
+  <h3>5. Email list</h3>
+  <p>
+    Use a free email tool (Substack, ConvertKit free tier). Send affiliate
+    offers to your list. But you need a way to collect emails first — usually
+    a website or social media.
+  </p>
+
+  <h2>Why a website is still better</h2>
+  <ul>
+    <li><strong>You own it.</strong> YouTube, Medium, and Quora can ban you or change rules. Your website is yours.</li>
+    <li><strong>SEO compounds.</strong> Blog posts rank higher over time. Social media posts decay.</li>
+    <li><strong>Multiple offers.</strong> One website can promote 20 products in one niche. Social media limits you to one link per post.</li>
+    <li><strong>Email capture.</strong> Websites let you build an email list. Email converts 3-5x better than any other traffic.</li>
+  </ul>
+
+  <h2>The honest recommendation</h2>
+  <p>
+    Start without a website if you must (YouTube + Pinterest). But set up a
+    free GitHub Pages or Blogger site as soon as possible. A website is the
+    foundation — everything else is traffic that points to it.
+  </p>
+  <p>
+    This entire site runs on <a href="../index.html">GitHub Pages</a> — free,
+    no coding experience needed to start. Read the
+    <a href="start-affiliate-marketing-no-money.html">beginner's guide</a>
+    for the full setup.
+  </p>
+
+  <p><a href="../guide.html" class="btn">Learn free traffic methods 💪</a></p>""",
+    },
+    {
+        "slug": "best-health-supplements-to-promote-2026",
+        "title": "Best Health Supplements to Promote as an Affiliate in 2026",
+        "meta_desc": "Top health supplement affiliate offers on ClickBank. Real EPC, commission, and gravity data. Which niches pay best and convert easiest.",
+        "keywords": "best health supplements affiliate, supplement affiliate programs, health niche clickbank, top supplement offers 2026, affiliate health products",
+        "content": """  <p>
+    Health & Fitness is the highest-paying niche on ClickBank. But not every
+    supplement offer is worth promoting. Here's how to pick the right ones,
+    with real data.
+  </p>
+
+  <div class="callout">
+    <strong>Why health?</strong> Evergreen demand (everyone wants to be
+    healthy), high commissions ($50-$200+ per sale), and emotional buying
+    (people buy supplements to solve real problems). It's the best starting
+    niche for new affiliates.
+  </div>
+
+  <h2>The best health sub-niches</h2>
+
+  <h3>Sleep</h3>
+  <p>
+    Sleep problems affect billions of people. Products like YU SLEEP pay $140+
+    per sale. Evergreen — people always have trouble sleeping.
+  </p>
+
+  <h3>Joint pain</h3>
+  <p>
+    Aging population = growing market. Offers like AMP Joint 10 pay $230+
+    per sale with proven EPC. Less competition than weight loss.
+  </p>
+
+  <h3>Weight loss</h3>
+  <p>
+    The biggest health niche. High competition but massive search volume.
+    Products like Metabo Drops and Venus Factor pay $200+ per sale.
+  </p>
+
+  <h3>Dental health</h3>
+  <p>
+    Emerging niche with less competition. DentalPrime and Dentolyn are new
+    offers with high EPC. Get in early before saturation.
+  </p>
+
+  <h3>Blood sugar / circulation</h3>
+  <p>
+    Growing market. BloodArmor and similar offers pay well. High emotional
+    urgency — people with blood sugar issues buy fast.
+  </p>
+
+  <h2>How to choose</h2>
+  <ol>
+    <li>Pick ONE sub-niche (sleep, joints, weight loss — pick one).</li>
+    <li>Check EPC on our <a href="../review.html">reviews page</a> — only promote offers with EPC above $3.</li>
+    <li>Check gravity — 20+ means it's proven.</li>
+    <li>Pick 2-3 offers in that sub-niche and write honest reviews for each.</li>
+  </ol>
+
+  <h2>What to avoid</h2>
+  <ul>
+    <li>Offers with $0 EPC — no proof they convert.</li>
+    <li>Offers with gravity 0 — nobody's earning from them.</li>
+    <li>Products with ridiculous claims — high refund rates kill your commission.</li>
+    <li>Promoting 5 sub-niches at once — pick one and go deep.</li>
+  </ul>
+
+  <p>See the top health offers with real data on our <a href="../review.html">reviews page</a>.</p>
+
+  <p><a href="../review.html" class="btn">Compare health offers 💪</a></p>""",
+    },
+    {
+        "slug": "how-long-does-affiliate-marketing-take",
+        "title": "How Long Does Affiliate Marketing Take to Earn Money? (Real Timeline)",
+        "meta_desc": "Honest timeline for affiliate marketing. When will you earn your first dollar? First $5/day? No fake promises — just the real numbers.",
+        "keywords": "how long affiliate marketing take, affiliate marketing timeline, when do you earn affiliate, how fast affiliate marketing, affiliate marketing results",
+        "content": """  <p>
+    Everyone wants to know: "How long until I earn money?" Here's the honest
+    answer, based on what's publicly known — not fake promises.
+  </p>
+
+  <h2>The short answer</h2>
+  <p>
+    First sale: 2-4 months. Consistent income ($5/day): 4-8 months. Full
+    replacement income: 12-24 months. These are estimates, not guarantees —
+    your results depend on effort, niche, and consistency.
+  </p>
+
+  <h2>The real timeline</h2>
+  <table>
+    <tr><th>Timeframe</th><th>What happens</th><th>Traffic</th><th>Earnings</th></tr>
+    <tr><td>Month 1</td><td>You build the site, write 10-15 articles</td><td>Near zero</td><td>$0</td></tr>
+    <tr><td>Month 2</td><td>Google starts indexing your pages</td><td>5-20/day</td><td>$0 (maybe first click)</td></tr>
+    <tr><td>Month 3</td><td>Some pages start ranking</td><td>20-50/day</td><td>Maybe first sale ($50-100)</td></tr>
+    <tr><td>Month 4-6</td><td>Compounding content + rankings</td><td>50-150/day</td><td>$1-5/day if consistent</td></tr>
+    <tr><td>Month 6-12</td><td>Authority building, Google trusts site</td><td>100-300/day</td><td>$5-20/day</td></tr>
+    <tr><td>Year 2</td><td>Compounding effect kicks in fully</td><td>300-1000+/day</td><td>$20-50+/day</td></tr>
+  </table>
+
+  <h2>What determines your speed</h2>
+  <ul>
+    <li><strong>Consistency:</strong> 2-3 articles per week beats 10 articles in one week then nothing for a month.</li>
+    <li><strong>Niche competition:</strong> Health & Fitness is competitive but high-volume. Less competitive niches rank faster but pay less.</li>
+    <li><strong>Content quality:</strong> Honest reviews with real data rank better than generic 500-word fluff.</li>
+    <li><strong>Offer choice:</strong> High EPC offers earn faster. Low EPC means you need more traffic to see the same income.</li>
+    <li><strong>Traffic method:</strong> YouTube is faster than SEO. Pinterest is faster than SEO but slower than YouTube.</li>
+  </ul>
+
+  <h2>Why most people quit before earning</h2>
+  <p>
+    The graph is flat for 2-3 months. No traffic, no sales, nothing. This is
+    where 90% of people quit. Then between month 3-4, the graph starts
+    curving upward. The people who earn are the ones who survived the flat
+    part.
+  </p>
+
+  <div class="callout">
+    <strong>The brutal truth:</strong> If you write 15 articles and quit in
+    month 2, you earn $0. If you write 50 articles over 6 months, you could
+    earn $5-20/day. The difference is not talent, not luck, not a secret
+    method. It's just not quitting.
+  </div>
+
+  <h2>How to speed it up</h2>
+  <ol>
+    <li>Add YouTube — videos rank in weeks, not months.</li>
+    <li>Add Pinterest — pins drive traffic while you wait for SEO.</li>
+    <li>Pick high-EPC offers so each click is worth more.</li>
+    <li>Target long-tail keywords (longer, specific search terms with less competition).</li>
+  </ol>
+
+  <p>Read the full <a href="../guide.html">traffic guide</a> and our <a href="how-to-earn-5-dollars-per-day-online.html">$5/day plan</a>.</p>
+
+  <p><a href="../review.html" class="btn">Find offers to promote 💪</a></p>""",
+    },
+    {
+        "slug": "clickbank-gravity-vs-epc-which-matters",
+        "title": "ClickBank Gravity vs EPC: Which Number Actually Matters More?",
+        "meta_desc": "Gravity vs EPC on ClickBank — which should you care about? Real comparison with examples. Stop guessing, start using the right metric.",
+        "keywords": "clickbank gravity vs epc, gravity or epc, which clickbank metric, epc vs gravity, clickbank metrics explained",
+        "content": """  <p>
+    EPC and gravity are the two numbers every ClickBank affiliate looks at.
+    But which one actually predicts whether you'll earn money? The answer
+    might surprise you.
+  </p>
+
+  <h2>The quick answer</h2>
+  <p>
+    <strong>EPC matters more.</strong> Always. EPC tells you if the offer
+    converts. Gravity tells you if other people are earning. But other people
+    earning doesn't mean YOU will earn — your traffic is different from theirs.
+  </p>
+
+  <h2>What each number tells you</h2>
+  <table>
+    <tr><th>Metric</th><th>What it measures</th><th>What it predicts</th></tr>
+    <tr><td>EPC</td><td>Average earnings per click across all affiliates</td><td>How much you'll earn per click (your ROI)</td></tr>
+    <tr><td>Gravity</td><td>How many affiliates earned in the last 12 weeks</td><td>How popular/competitive the offer is</td></tr>
+  </table>
+
+  <h2>When gravity helps</h2>
+  <p>
+    Gravity is useful as a validation signal. If gravity is 100+, it confirms
+    the offer converts for many people — it's not a fluke. But it doesn't tell
+    you how MUCH you'll earn per click.
+  </p>
+
+  <h2>When EPC helps</h2>
+  <p>
+    EPC is your actual ROI predictor. If EPC is $5, you expect ~$5 per click
+    you send. If EPC is $0.50, you expect $0.50 per click. This is the number
+    that determines whether your traffic will pay off.
+  </p>
+
+  <h2>Real example</h2>
+  <ul>
+    <li>Offer A: Gravity 300, EPC $0.50, Commission $200</li>
+    <li>Offer B: Gravity 30, EPC $5, Commission $50</li>
+  </ul>
+  <p>
+    Most beginners pick Offer A (gravity 300 = "it must be good!"). But Offer B
+    earns 10x more per click. You need 1,000 clicks to make $500 on Offer A.
+    You need 100 clicks to make $500 on Offer B.
+  </p>
+
+  <h2>The winning formula</h2>
+  <ol>
+    <li><strong>Filter by EPC first:</strong> Only look at offers with EPC above $3.</li>
+    <li><strong>Then check gravity:</strong> 20+ confirms it's not a fluke.</li>
+    <li><strong>Then check commission:</strong> Higher is better, but only after EPC and gravity pass.</li>
+  </ol>
+
+  <p>Compare both numbers for every offer on our <a href="../review.html">reviews page</a>.</p>
+
+  <p><a href="../review.html" class="btn">Compare EPC and gravity 💪</a></p>""",
+    },
+    {
+        "slug": "passive-income-affiliate-marketing-truth",
+        "title": "Passive Income Affiliate Marketing: The Honest Truth Nobody Tells You",
+        "meta_desc": "Is affiliate marketing really passive income? The honest answer. What's passive, what's not, and how long it takes to get there.",
+        "keywords": "passive income affiliate marketing, affiliate marketing passive, is affiliate marketing passive income, passive income truth, affiliate income passive",
+        "content": """  <p>
+    "Passive income" is the biggest buzzword in affiliate marketing. Here's
+    the honest truth: it's partially true, but not the way most people think.
+  </p>
+
+  <h2>What IS passive</h2>
+  <ul>
+    <li><strong>Articles you already wrote:</strong> A blog post you published 6 months ago can still earn commissions today without any work.</li>
+    <li><strong>YouTube videos:</strong> A video you made once can drive clicks for years.</li>
+    <li><strong>Pinterest pins:</strong> Pins live for months and keep getting clicks.</li>
+    <li><strong>Email sequences:</strong> A pre-written email series sends offers automatically.</li>
+  </ul>
+
+  <h2>What is NOT passive</h2>
+  <ul>
+    <li><strong>Writing new content:</strong> If you stop publishing, traffic eventually plateaus and declines.</li>
+    <li><strong>Monitoring offers:</strong> ClickBank offers die, change commission rates, or get discontinued. You need to update.</li>
+    <li><strong>SEO maintenance:</strong> Google updates its algorithm. Rankings fluctuate. You need to adapt.</li>
+    <li><strong>Building traffic:</strong> The first 6 months are 100% active work with $0 return.</li>
+  </ul>
+
+  <h2>The real timeline to "passive"</h2>
+  <table>
+    <tr><th>Phase</th><th>Effort</th><th>Income</th><th>Passive?</th></tr>
+    <tr><td>Month 1-6</td><td>10-15 hrs/week</td><td>$0-5/day</td><td>No — pure active work</td></tr>
+    <tr><td>Month 6-12</td><td>5-10 hrs/week</td><td>$5-20/day</td><td>Partially — old content earns, new content needed</td></tr>
+    <tr><td>Year 2</td><td>3-5 hrs/week</td><td>$20-50+/day</td><td>Mostly — old content does most of the work</td></tr>
+    <tr><td>Year 3+</td><td>2-3 hrs/week</td><td>$50-100+/day</td><td>Yes — maintenance mode</td></tr>
+  </table>
+
+  <div class="callout">
+    <strong>The truth:</strong> Affiliate income becomes passive AFTER
+    12-24 months of active work. It's not passive from day 1. Anyone who
+    tells you otherwise is selling a course.
+  </div>
+
+  <h2>How to reach passive faster</h2>
+  <ol>
+    <li>Pick high-EPC offers so each article earns more.</li>
+    <li>Write evergreen content (reviews, guides) not news/trends.</li>
+    <li>Promote offers with recurring commissions (rebill offers).</li>
+    <li>Build an email list — email is the most passive channel.</li>
+    <li>Repurpose content (one article → video → pin → email).</li>
+  </ol>
+
+  <p>Start building with our <a href="start-affiliate-marketing-no-money.html">beginner's guide</a> and <a href="../review.html">offer reviews</a>.</p>
+
+  <p><a href="../review.html" class="btn">Start building passive income 💪</a></p>""",
+    },
 ]
 
 
