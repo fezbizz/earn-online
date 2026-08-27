@@ -225,7 +225,7 @@ def generate_elevenlabs_audio(text, api_key, voice_id=None, output_path=None):
 
     # Default voice — you can change this to your preferred voice
     if not voice_id:
-        voice_id = "21m00Tcm4TlvDq8ikWAM"  # Rachel — default ElevenLabs voice
+        voice_id = "JBFqnCBsd6RMkjVDRZzb"  # George — warm, captivating storyteller (premade, free tier)
 
     url = f"https://api.elevenlabs.io/v1/text-to-speech/{voice_id}"
 
