@@ -69,8 +69,9 @@ def generate_script(offer):
     grav_val = float(offer.get("gravity", 0) or 0)
     comm_val = float(offer.get("commission", 0) or 0)
 
-    # Video title (SEO-optimized for YouTube search)
-    video_title = f"{title} Review — Does It Actually Work? (Real Data)"
+    # Video title (SEO-optimized for YouTube search, max 100 chars)
+    raw_title = f"{title} Review — Does It Actually Work? (Real Data)"
+    video_title = raw_title[:95] + "..." if len(raw_title) > 100 else raw_title
 
     # Build scene-by-scene script
     # Each scene = one slide + voiceover text
