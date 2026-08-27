@@ -832,14 +832,20 @@ def main():
     print(f"\nTotal articles generated: {articles_generated}")
 
     if not args.dry_run:
-        # Update sitemap
+        # Update sitemap — include core pages, blog articles, AND review pages
         sitemap_urls = [
             f"  <url><loc>{BASE_URL}/</loc><changefreq>weekly</changefreq><priority>1.0</priority></url>",
             f"  <url><loc>{BASE_URL}/review.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>",
             f"  <url><loc>{BASE_URL}/guide.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>",
         ]
+        # Add blog articles
         for slug in slugs_for_sitemap:
             sitemap_urls.append(f"  <url><loc>{BASE_URL}/blog/{slug}.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>")
+        # Add individual product review pages
+        reviews_dir = SCRIPT_DIR / "reviews"
+        if reviews_dir.exists():
+            for rev_file in sorted(reviews_dir.glob("*.html")):
+                sitemap_urls.append(f"  <url><loc>{BASE_URL}/reviews/{rev_file.name}</loc><changefreq>weekly</changefreq><priority>0.7</priority></url>")
         sitemap = f"""<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 {chr(10).join(sitemap_urls)}
