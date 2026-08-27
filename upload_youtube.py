@@ -71,7 +71,10 @@ def get_youtube_service():
             creds.refresh(Request())
         else:
             flow = InstalledAppFlow.from_client_secrets_file(str(CLIENT_SECRET), SCOPES)
-            creds = flow.run_local_server(port=0)
+            # Use run_console instead of local server (works without browser auto-open)
+            creds = flow.run_console(
+                authorization_prompt_message="Open this URL in your browser to authorize:\n  {url}\n\nPaste the authorization code here: "
+            )
 
         with open(TOKEN_PATH, "w") as f:
             f.write(creds.to_json())
