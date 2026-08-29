@@ -221,10 +221,10 @@ Timestamps:
 
 
 def generate_elevenlabs_audio(text, api_key, voice_id=None, output_path=None):
-    """Generate voiceover audio using ElevenLabs API."""
+    """Generate voiceover audio using ElevenLabs API (primary) or edge-tts (free fallback)."""
     import requests
 
-    # Default voice — you can change this to your preferred voice
+    # Try ElevenLabs first
     if not voice_id:
         voice_id = "JBFqnCBsd6RMkjVDRZzb"  # George — warm, captivating storyteller (premade, free tier)
 
@@ -246,16 +246,46 @@ def generate_elevenlabs_audio(text, api_key, voice_id=None, output_path=None):
         },
     }
 
-    resp = requests.post(url, json=data, headers=headers, timeout=60)
+    try:
+        resp = requests.post(url, json=data, headers=headers, timeout=60)
+        if resp.status_code == 200:
+            if output_path:
+                with open(output_path, "wb") as f:
+                    f.write(resp.content)
+                return str(output_path)
+            return resp.content
+        else:
+            error_msg = resp.text[:200]
+            if "quota" in error_msg.lower() or "401" in str(resp.status_code):
+                print(f"  ElevenLabs quota exceeded — falling back to edge-tts (free)")
+                return generate_edge_tts(text, output_path)
+            print(f"  ElevenLabs error {resp.status_code}: {error_msg}")
+            return None
+    except Exception as e:
+        print(f"  ElevenLabs error: {e} — falling back to edge-tts (free)")
+        return generate_edge_tts(text, output_path)
 
-    if resp.status_code == 200:
-        if output_path:
-            with open(output_path, "wb") as f:
-                f.write(resp.content)
+
+def generate_edge_tts(text, output_path):
+    """Generate voiceover using edge-tts (free, unlimited, Microsoft Edge Neural voices)."""
+    import asyncio
+    import edge_tts
+
+    async def _generate():
+        voice = "en-US-AndrewMultilingualNeural"  # Warm, confident, authentic, honest
+        communicate = edge_tts.Communicate(text, voice, rate="-5%")
+        await communicate.save(output_path)
+
+    try:
+        asyncio.run(_generate())
+        if output_path and Path(output_path).exists() and Path(output_path).stat().st_size > 5000:
+            print(f"  edge-tts audio saved")
             return str(output_path)
-        return resp.content
-    else:
-        print(f"  ElevenLabs error {resp.status_code}: {resp.text[:200]}")
+        else:
+            print(f"  edge-tts generated empty file")
+            return None
+    except Exception as e:
+        print(f"  edge-tts error: {e}")
         return None
 
 
