@@ -9,3 +9,4 @@ __pycache__/
 *.pyc
 offers_cache.json
 youtube/
+pinterest/
