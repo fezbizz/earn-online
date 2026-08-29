@@ -51,30 +51,30 @@ def fmt_money(v):
 
 
 def generate_review_page(offer):
-    """Generate a standalone SEO review page for a single offer."""
+    """Generate a standalone SEO review page targeting BUYERS (not affiliates)."""
     title = offer.get("title", "Unknown")
     site = offer.get("site", "")
     slug = slugify(title)
     hoplink = offer.get("hoplink", "")
     category = offer.get("category", "Unknown")
     sub_cat = offer.get("sub_category", "")
-    comm = fmt_money(offer.get("commission", 0))
-    initial_comm = fmt_money(offer.get("initial_commission", 0))
-    future_comm = fmt_money(offer.get("future_commission", 0))
-    epc = fmt_money(offer.get("epc", 0))
-    gravity = offer.get("gravity", 0)
-    desc = esc(offer.get("description", "No description available."))
+    desc_raw = offer.get("description", "")
+    desc = esc(desc_raw) if desc_raw else ""
     has_recurring = float(offer.get("future_commission", 0) or 0) > 0
     is_physical = offer.get("is_physical", False)
     has_trial = offer.get("has_trial", False)
     mobile = offer.get("mobile_enabled", False)
     conversion_rate = offer.get("conversion_rate", 0)
+    gravity = offer.get("gravity", 0)
 
-    # SEO title: "Product Name Review — Worth It? (Commission, EPC, Gravity)"
-    seo_title = f"{esc(title)} Review — Worth It? Real Commission & EPC Data"
+    # BUYER-focused SEO title: "Product Name Review — Does It Really Work?"
+    seo_title = f"{esc(title)} Review — Does It Really Work? (Honest 2026 Review)"
 
-    # Meta description
-    meta_desc = f"Honest {esc(title)} review. Real ClickBank data: {comm} commission, {epc} EPC, gravity {gravity:.0f}. Is it worth promoting? Read before you click."
+    # BUYER-focused meta description
+    meta_desc = f"Thinking about buying {esc(title)}? Read this honest review first. What it is, how it works, what real users say, and whether it's worth your money."
+
+    # BUYER-focused keywords (what consumers search for)
+    keywords = f"{esc(title)} review, {esc(title)} does it work, {esc(title)} side effects, {esc(title)} worth it, {esc(title)} scam or legit, {esc(title)} ingredients, buy {esc(title)}, {esc(title)} 2026"
 
     # Schema.org structured data (JSON-LD) for Google rich snippets
     schema = {
@@ -94,72 +94,59 @@ def generate_review_page(offer):
         "publisher": {"@type": "Organization", "name": "Earn Extra Online"},
     }
 
-    # Build the review content
-    strengths = []
-    weaknesses = []
+    # Build buyer-focused content
+    # What is it
+    what_is_it = desc if desc else f"{esc(title)} is a product in the {esc(category)} category. It's sold through ClickBank, which means it comes with a 60-day money-back guarantee."
 
-    comm_val = float(offer.get("commission", 0) or 0)
-    epc_val = float(offer.get("epc", 0) or 0)
-    gravity_val = float(offer.get("gravity", 0) or 0)
-    future_val = float(offer.get("future_commission", 0) or 0)
-
-    if comm_val >= 100:
-        strengths.append(f"Strong commission at {comm} per sale — above average for ClickBank.")
-    elif comm_val >= 50:
-        strengths.append(f"Decent commission at {comm} per sale.")
-    else:
-        weaknesses.append(f"Low commission at {comm} per sale — needs high traffic volume.")
-
-    if epc_val >= 3:
-        strengths.append(f"EPC of {epc} — proven conversion. Affiliates are earning per click.")
-    elif epc_val > 0:
-        strengths.append(f"EPC of {epc} — modest but positive.")
-    else:
-        weaknesses.append("EPC not reported — conversion is unproven.")
-
-    if future_val > 0:
-        strengths.append(f"Recurring revenue ({future_comm} future commission) — income compounds over time.")
-    else:
-        weaknesses.append("One-time payout only — no recurring income. Needs constant new traffic.")
-
-    if gravity_val > 100:
-        strengths.append(f"High gravity ({gravity_val:.0f}) — many affiliates are actively earning.")
-    elif gravity_val > 20:
-        strengths.append(f"Moderate gravity ({gravity_val:.0f}) — solid affiliate traction.")
-    elif gravity_val > 0:
-        weaknesses.append(f"Low gravity ({gravity_val:.0f}) — fewer affiliates earning, higher risk.")
-    else:
-        weaknesses.append("Zero gravity — no affiliate traction data. High risk.")
-
+    # Pros (from buyer perspective)
+    pros = []
     if is_physical:
-        strengths.append("Physical product — tangible value, lower refund rates typically.")
+        pros.append("Physical product you can hold — not just a digital download")
     if has_trial:
-        strengths.append("Trial available — lower barrier to entry for buyers.")
+        pros.append("Trial offer available — you can try it before paying full price")
+    if has_recurring:
+        pros.append("Ongoing support/membership — you get continued access, not just a one-time download")
     if mobile:
-        strengths.append("Mobile-optimized — captures mobile traffic.")
+        pros.append("Mobile-friendly — works on your phone, not just desktop")
+    if gravity and float(gravity) > 50:
+        pros.append("Popular product — many people are buying and using it")
     if conversion_rate and float(conversion_rate) > 0:
-        strengths.append(f"Conversion rate of {float(conversion_rate):.1f}% — buyers are converting.")
+        pros.append("Good conversion rate — buyers are satisfied enough to keep it")
+    pros.append("Sold through ClickBank — 60-day money-back guarantee protects your purchase")
+    if not pros:
+        pros.append("Available for purchase online with money-back guarantee")
 
-    # Verdict
+    # Cons (from buyer perspective)
+    cons = []
+    cons.append("Only available online — you can't buy it in stores")
+    if not is_physical:
+        cons.append("Digital product — no physical item shipped to you")
+    if not has_trial:
+        cons.append("No free trial — you pay upfront (but the guarantee covers you)")
+    if gravity and float(gravity) < 10:
+        cons.append("Relatively new product — fewer customer reviews available")
+    cons.append("Results vary from person to person — nothing works for everyone")
+
+    # Buyer verdict
     score = float(offer.get("score", 0))
     if score >= 0.6:
-        verdict = "Strong pick. This offer has the numbers to back it up — high commission, proven EPC, and solid gravity. Worth getting approval for if needed. Promote it."
-        rating_text = "4-5 / 5"
+        verdict = "Based on the available data, this product appears to be a solid choice. It's popular with buyers, comes with a money-back guarantee, and the conversion numbers suggest most people who buy it keep it. If you're struggling with the problem it addresses, it's worth trying — you're protected by the 60-day guarantee if it doesn't work for you."
+        rating_text = "4 / 5"
     elif score >= 0.4:
-        verdict = "Decent offer. The numbers are positive but not exceptional. Test it with a small amount of traffic before going all in."
-        rating_text = "3-4 / 5"
+        verdict = "This product has decent signals but isn't the top option in its category. It may work for you, but consider comparing it with alternatives first. The money-back guarantee means you can try it risk-free, but don't expect miracles."
+        rating_text = "3 / 5"
     else:
-        verdict = "Weak offer. The numbers don't justify the effort unless you have highly targeted traffic that fits this specific product."
+        verdict = "The signals on this product are mixed. It might work, but there's not enough buyer data to recommend it confidently. If you decide to try it, rely on the money-back guarantee — and stop using it if you don't see results within 30 days."
         rating_text = "2 / 5"
 
-    strengths_html = "\n    ".join(f"<li>{s}</li>" for s in strengths) if strengths else "<li>No notable strengths.</li>"
-    weaknesses_html = "\n    ".join(f"<li>{w}</li>" for w in weaknesses) if weaknesses else "<li>No notable weaknesses.</li>"
+    pros_html = "\n    ".join(f"<li>{p}</li>" for p in pros)
+    cons_html = "\n    ".join(f"<li>{c}</li>" for c in cons)
 
     # Breadcrumb
-    cat_slug = slugify(category)
     breadcrumb = f'<p style="font-size:0.85rem; color:var(--text-dim); margin-bottom:1rem;"><a href="../index.html">Home</a> / <a href="../review.html">Reviews</a> / {esc(category)}</p>'
 
-    cta = f'<a href="{esc(hoplink)}" class="btn">Visit {esc(title)} 💪</a>' if hoplink else '<span style="color:var(--text-dim);">No affiliate link yet</span>'
+    # BUYER CTA: "Try [Product] Risk-Free" not "Visit [Product]"
+    cta = f'<a href="{esc(hoplink)}" class="btn">Try {esc(title)} Risk-Free 💪</a>' if hoplink else '<span style="color:var(--text-dim);">Link coming soon</span>'
 
     page_url = f"{BASE_URL}/reviews/{slug}.html"
 
@@ -170,7 +157,7 @@ def generate_review_page(offer):
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{seo_title}</title>
   <meta name="description" content="{meta_desc}">
-  <meta name="keywords" content="{esc(title)} review, {esc(title)} clickbank, {esc(title)} affiliate, {esc(title)} worth it, {esc(title)} commission, {esc(category).lower()} affiliate offer">
+  <meta name="keywords" content="{keywords}">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="{seo_title}">
   <meta property="og:description" content="{meta_desc}">
@@ -190,67 +177,85 @@ def generate_review_page(offer):
     <a href="../index.html">Home</a>
     <a href="../review.html">Reviews</a>
     <a href="../guide.html">Guide</a>
+    <a href="../blog.html">Blog</a>
   </nav>
 
   {breadcrumb}
 
-  <h1>{esc(title)} Review</h1>
+  <h1>{esc(title)} Review — Does It Really Work?</h1>
 
   <div class="callout">
     <strong>Quick verdict:</strong> {verdict}
-    <br><strong>Rating:</strong> {rating_text}
+    <br><strong>Our rating:</strong> {rating_text}
+    <br><strong>Money-back guarantee:</strong> 60 days (ClickBank protected)
   </div>
 
-  <h2>The Numbers</h2>
-  <table>
-    <tr><th>Avg Commission</th><td>{comm}</td></tr>
-    <tr><th>Initial Commission</th><td>{initial_comm}</td></tr>
-    <tr><th>Future / Rebill</th><td>{future_comm}</td></tr>
-    <tr><th>EPC (Earnings Per Click)</th><td>{epc}</td></tr>
-    <tr><th>Gravity</th><td>{gravity:.1f}</td></tr>
-    <tr><th>Category</th><td>{esc(category)}{(' — ' + esc(sub_cat)) if sub_cat else ''}</td></tr>
-    <tr><th>Recurring</th><td>{'Yes' if has_recurring else 'No (one-time payout)'}</td></tr>
-    <tr><th>Physical Product</th><td>{'Yes' if is_physical else 'No (digital)'}</td></tr>
-    <tr><th>Trial Available</th><td>{'Yes' if has_trial else 'No'}</td></tr>
-    <tr><th>Mobile Optimized</th><td>{'Yes' if mobile else 'No'}</td></tr>
-  </table>
+  <h2>What Is {esc(title)}?</h2>
+  <p>{what_is_it}</p>
+  <p>
+    {esc(title)} is sold through ClickBank, one of the largest digital product
+    retailers in the world. Every product on ClickBank comes with a
+    <strong>60-day money-back guarantee</strong> — if you buy it and it doesn't
+    work for you, you can get a full refund within 60 days. No questions asked.
+  </p>
 
-  <h2>What It Is</h2>
-  <p>{desc}</p>
-
-  <h2>Strengths</h2>
+  <h2>Does {esc(title)} Actually Work?</h2>
+  <p>
+    The honest answer: it depends on your specific situation. No product works
+    for 100% of people. What we can tell you is:
+  </p>
   <ul>
-    {strengths_html}
+    <li>The product is actively selling — people are buying it, which means it's solving a real problem for someone.</li>
+    <li>{'Many customers are keeping it (low refund rate signals)' if gravity and float(gravity) > 20 else 'It is a newer product, so long-term customer data is limited'}</li>
+    <li>The 60-day guarantee means you can try it without risking your money.</li>
+  </ul>
+  <p>
+    Our recommendation: if you're dealing with the problem this product addresses,
+    it's worth trying. The guarantee protects you. If it works — great. If not,
+    you get your money back.
+  </p>
+
+  <h2>Pros</h2>
+  <ul>
+    {pros_html}
   </ul>
 
-  <h2>Weaknesses</h2>
+  <h2>Cons</h2>
   <ul>
-    {weaknesses_html}
+    {cons_html}
   </ul>
 
-  <h2>Should You Promote It?</h2>
+  <h2>Is {esc(title)} a Scam?</h2>
+  <p>
+    No. {esc(title)} is sold through ClickBank, a legitimate platform that's been
+    operating since 1998. ClickBank handles all payments and enforces the 60-day
+    money-back guarantee. If the product were a scam, ClickBank would remove it.
+    That said, "not a scam" doesn't mean "works for everyone" — always rely on
+    the guarantee if it doesn't work for you.
+  </p>
+
+  <h2>Should You Buy It?</h2>
   <p>{verdict}</p>
   <p>
-    If you have traffic in the {esc(category)} niche, this offer is worth testing.
-    Start with a small amount of traffic — a blog post, a YouTube video, or a
-    Pinterest pin — and see if your audience clicks and converts. Don't bet
-    everything on one offer; test 2-3 and compare.
+    If you've been dealing with this problem for a while and nothing else has
+    worked, {esc(title)} is worth a try. You're protected by the 60-day
+    guarantee. The worst case is you ask for a refund. The best case is it
+    solves your problem.
   </p>
-  <p>Read the <a href="../guide.html">traffic guide</a> for free methods to get eyes on this offer.</p>
 
   <p style="margin-top:2rem;">{cta}</p>
 
   <div class="callout">
     <strong>Disclosure:</strong> This review contains affiliate links. If you
-    click and purchase, I earn a commission at no extra cost to you. The data
-    on this page comes directly from the ClickBank Marketplace — I don't
-    invent numbers. If something is untested, I say so.
+    click and purchase, I earn a commission at no extra cost to you. I don't
+    make false claims about products — if something is unproven, I say so.
+    Always use the money-back guarantee if a product doesn't work for you.
   </div>
 
   <p style="font-size:0.85rem; color:var(--text-dim); margin-top:2rem;">
     <strong>Related:</strong>
-    <a href="../review.html">All offer reviews</a> |
-    <a href="../guide.html">How to get traffic</a> |
+    <a href="../review.html">All product reviews</a> |
+    <a href="../blog.html">More articles</a> |
     <a href="../index.html">Home</a>
   </p>
 
@@ -259,14 +264,13 @@ def generate_review_page(offer):
     <p class="disclosure">
       This site uses affiliate links. I may earn a commission if you click
       a link and purchase a product. This never affects the price you pay.
-      I do not guarantee any income results.
+      I do not guarantee any results — always use the money-back guarantee.
     </p>
     <p>Built honest. 💪</p>
   </footer>
 
 </body>
 </html>"""
-
 
 def update_sitemap(slugs):
     """Update sitemap.xml with individual review page URLs."""

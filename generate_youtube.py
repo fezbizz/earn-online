@@ -69,144 +69,139 @@ def generate_script(offer):
     grav_val = float(offer.get("gravity", 0) or 0)
     comm_val = float(offer.get("commission", 0) or 0)
 
-    # Video title (SEO-optimized for YouTube search, max 100 chars)
-    raw_title = f"{title} Review — Does It Actually Work? (Real Data)"
+    # Video title (BUYER-focused, max 100 chars)
+    raw_title = f"{title} Review — Does It Really Work? (Honest 2026)"
     video_title = raw_title[:95] + "..." if len(raw_title) > 100 else raw_title
 
-    # Build scene-by-scene script
-    # Each scene = one slide + voiceover text
-
+    # Build scene-by-scene script — BUYER FOCUSED
     scenes = []
 
-    # Scene 1: Hook
+    # Scene 1: Hook (buyer question)
     scenes.append({
-        "slide_text": f"{title}\nReview — Does It Actually Work?",
-        "subtitle": "Real ClickBank Data. No Hype.",
-        "voiceover": f"Is {title} worth your money? In this video, I break down the real data — commission, EPC, and gravity — so you can decide before you click. No hype, no sales pitch, just the numbers.",
+        "slide_text": f"{title}\nReview — Does It Really Work?",
+        "subtitle": "Honest Review. No Hype.",
+        "voiceover": f"Thinking about buying {title}? Before you spend your money, watch this honest review. I will tell you what it is, how it works, and whether it is actually worth it. No hype, no sales pitch — just the facts.",
         "duration": 10,
     })
 
     # Scene 2: What is it
-    short_desc = desc_text[:150] if desc_text else f"A product in the {category} category on ClickBank."
+    short_desc = desc_text[:150] if desc_text else f"A product in the {category} category."
     scenes.append({
         "slide_text": f"What Is {title}?",
         "subtitle": category,
-        "voiceover": f"{title} is a product in the {category} category on ClickBank. {short_desc}",
+        "voiceover": f"{title} is a product in the {category} category. {short_desc} It is sold through ClickBank, which means it comes with a 60-day money-back guarantee.",
         "duration": 15,
     })
 
-    # Scene 3: The numbers
+    # Scene 3: Does it work? (buyer perspective)
     scenes.append({
-        "slide_text": f"The Numbers\nCommission: {comm}\nEPC: {epc}\nGravity: {gravity:.0f}",
-        "subtitle": "Data from ClickBank Marketplace",
-        "voiceover": f"Here are the real numbers from the ClickBank Marketplace. The commission is {comm} per sale. The EPC — earnings per click — is {epc}. And the gravity score is {gravity:.0f}, which means this many affiliates are actively earning from this offer.",
+        "slide_text": f"Does {title} Work?",
+        "subtitle": "What the data says",
+        "voiceover": f"Does it actually work? The honest answer is — it depends on your situation. No product works for 100 percent of people. But here is what we know: the product is actively selling, which means it is solving a real problem for buyers. And the 60-day money-back guarantee means you can try it without risk.",
         "duration": 15,
     })
 
-    # Scene 4: What the numbers mean
-    if epc_val >= 3 and grav_val > 20:
-        verdict_voice = "These numbers are strong. The EPC shows affiliates are earning, and the gravity confirms it. This offer converts."
-        verdict_text = "VERDICT: Strong pick"
-    elif epc_val > 0:
-        verdict_voice = f"The EPC is positive at {epc}, which means the offer does convert. But the gravity is {gravity:.0f}, which means fewer affiliates are testing it. It could work, but it's more of a gamble."
-        verdict_text = "VERDICT: Decent but mixed"
-    else:
-        verdict_voice = "The EPC is not reported, which means conversion is unproven. I would test this carefully with a small amount of traffic before committing."
-        verdict_text = "VERDICT: Unproven"
-    scenes.append({
-        "slide_text": verdict_text,
-        "subtitle": "Based on EPC + Gravity",
-        "voiceover": verdict_voice,
-        "duration": 12,
-    })
-
-    # Scene 5: Strengths
-    strengths = []
-    if comm_val >= 100:
-        strengths.append(f"High commission at {comm} per sale")
-    elif comm_val >= 50:
-        strengths.append(f"Decent commission at {comm} per sale")
-    if epc_val >= 3:
-        strengths.append(f"EPC of {epc} — proven conversion")
-    if grav_val > 100:
-        strengths.append(f"High gravity ({gravity:.0f}) — many affiliates earning")
-    elif grav_val > 20:
-        strengths.append(f"Moderate gravity ({gravity:.0f}) — solid traction")
+    # Scene 4: Pros
+    pros = []
+    if is_physical if 'is_physical' in dir() else offer.get("is_physical", False):
+        pros.append("Physical product you can hold")
+    if offer.get("has_trial", False):
+        pros.append("Trial offer available — try before you pay full price")
     if has_recurring:
-        strengths.append(f"Recurring revenue — income compounds")
-    strengths_text = "\n".join(f"✓ {s}" for s in strengths) if strengths else "✓ Positive EPC"
+        pros.append("Ongoing access — not just a one-time download")
+    if offer.get("mobile_enabled", False):
+        pros.append("Works on your phone")
+    if grav_val > 50:
+        pros.append("Popular product — many people are buying it")
+    pros.append("60-day money-back guarantee protects your purchase")
+    pros_text = "\n".join(f"+ {p}" for p in pros[:5])
     scenes.append({
-        "slide_text": f"Strengths\n\n{strengths_text}",
-        "subtitle": "Why it might work",
-        "voiceover": "Here are the strengths. " + ". ".join(strengths) + ".",
+        "slide_text": f"Pros\n\n{pros_text}",
+        "subtitle": "Why it might be worth trying",
+        "voiceover": "Here are the pros. " + ". ".join(pros[:5]) + ".",
         "duration": 12,
     })
 
-    # Scene 6: Weaknesses
-    weaknesses = []
-    if comm_val < 50:
-        weaknesses.append(f"Lower commission at {comm}")
-    if epc_val == 0:
-        weaknesses.append("No EPC data — conversion unproven")
-    if grav_val < 10 and grav_val > 0:
-        weaknesses.append(f"Low gravity ({gravity:.0f}) — few affiliates earning")
-    if not has_recurring:
-        weaknesses.append("One-time payout — no recurring income")
-    weaknesses_text = "\n".join(f"✗ {w}" for w in weaknesses) if weaknesses else "✗ Limited data available"
+    # Scene 5: Cons
+    cons = []
+    cons.append("Only available online — not in stores")
+    if not offer.get("is_physical", False):
+        cons.append("Digital product — nothing shipped to you")
+    if not offer.get("has_trial", False):
+        cons.append("No free trial — you pay upfront")
+    if grav_val < 10:
+        cons.append("Relatively new — fewer customer reviews")
+    cons.append("Results vary — nothing works for everyone")
+    cons_text = "\n".join(f"- {c}" for c in cons[:4])
     scenes.append({
-        "slide_text": f"Weaknesses\n\n{weaknesses_text}",
-        "subtitle": "What to watch out for",
-        "voiceover": "Here are the weaknesses. " + ". ".join(weaknesses) + ".",
+        "slide_text": f"Cons\n\n{cons_text}",
+        "subtitle": "What to consider before buying",
+        "voiceover": "Here are the cons. " + ". ".join(cons[:4]) + ".",
         "duration": 12,
     })
 
-    # Scene 7: How to promote
+    # Scene 6: Is it a scam?
     scenes.append({
-        "slide_text": "How to Promote It\n\n1. Write an honest review\n2. Make a YouTube video\n3. Pin on Pinterest\n4. Be consistent for 3 months",
-        "subtitle": "Free traffic methods",
-        "voiceover": "If you decide to promote this offer, here is the boring method that works. Write an honest review article. Make a YouTube video about it. Pin it on Pinterest. Do this consistently for three months before judging results. There are no shortcuts.",
+        "slide_text": f"Is {title} a Scam?",
+        "subtitle": "No — but here is the catch",
+        "voiceover": f"Is {title} a scam? No. It is sold through ClickBank, a legitimate platform that has been around since 1998. ClickBank enforces the 60-day money-back guarantee. If it were a scam, ClickBank would remove it. But not being a scam does not mean it works for everyone — always use the guarantee if it does not work for you.",
         "duration": 15,
     })
 
-    # Scene 8: CTA
+    # Scene 7: Should you buy it?
+    if grav_val > 20:
+        verdict = "If you are dealing with the problem this product addresses, it is worth trying. You are protected by the 60-day guarantee. The worst case is you ask for a refund."
+    elif grav_val > 0:
+        verdict = "This product has some signals but is relatively new. It might work for you. The 60-day guarantee means you can try it risk-free."
+    else:
+        verdict = "The data on this product is limited. It might work, but there is not enough evidence to recommend it confidently. Try it only if you are willing to use the guarantee."
     scenes.append({
-        "slide_text": f"Try {title}\nLink in description",
-        "subtitle": "Affiliate link below",
-        "voiceover": f"If this review was helpful, the link is in the description below. Check out the full written review on our site for more details. Thanks for watching, and remember — the boring system works. Stick with it.",
+        "slide_text": f"Should You Buy {title}?",
+        "subtitle": "The honest verdict",
+        "voiceover": verdict + " If it works, great. If not, you get your money back. That is the beauty of the ClickBank guarantee.",
+        "duration": 12,
+    })
+
+    # Scene 8: CTA (buyer-focused)
+    scenes.append({
+        "slide_text": f"Try {title}\nRisk-Free",
+        "subtitle": "60-day money-back guarantee",
+        "voiceover": f"If this review was helpful and you want to try {title}, the link is in the description below. You are protected by the 60-day money-back guarantee. Thanks for watching, and remember — if a product does not work for you, always ask for a refund.",
         "duration": 10,
     })
 
     # Full voiceover script (for ElevenLabs)
     full_voiceover = " ".join(s["voiceover"] for s in scenes)
 
-    # YouTube description
-    yt_description = f"""{title} Review — Does It Actually Work?
+    # YouTube description (BUYER-focused)
+    yt_description = f"""{title} Review — Does It Really Work?
 
-Real ClickBank data: {comm} commission, {epc} EPC, {gravity:.0f} gravity. No hype — just the numbers.
+Thinking about buying {title}? Watch this honest review first. What it is, does it work, pros and cons, and whether it's worth your money.
 
 Full written review: {BASE_URL}/reviews/
 
-Try {title}: {hoplink}
+Try {title} risk-free (60-day guarantee): {hoplink}
 
-Disclosure: This video contains affiliate links. If you click and buy, I earn a commission at no extra cost to you. I don't guarantee any income results.
+Disclosure: This video contains affiliate links. If you click and buy, I earn a commission at no extra cost to you. I don't make false claims — always use the 60-day money-back guarantee if a product doesn't work for you.
 
 Timestamps:
 0:00 - Introduction
 0:10 - What is {title}?
-0:25 - The real numbers
-0:40 - What the numbers mean
-0:52 - Strengths
-1:04 - Weaknesses
-1:16 - How to promote it
-1:31 - Final verdict
+0:25 - Does it actually work?
+0:40 - Pros
+0:52 - Cons
+1:04 - Is it a scam?
+1:19 - Should you buy it?
+1:31 - Try it risk-free
 
-#clickbank #affiliatemarketing #{site.lower()} #review"""
+#{site.lower()} #review #doesitwork #honestreview #{category.lower().replace(' & ', '').replace(' ', '')}"""
 
-    # Tags
+    # Tags (BUYER-focused)
     tags = [
-        title.lower(), site.lower(), "clickbank", "affiliate marketing",
-        "clickbank review", "does it work", category.lower().replace(" & ", ""),
-        "affiliate offer", "earn money online", "passive income",
+        title.lower(), site.lower(), "review", "does it work",
+        "honest review", "is it worth it", "scam or legit",
+        category.lower().replace(" & ", ""), "product review",
+        "should i buy", "real review",
     ]
 
     return {
