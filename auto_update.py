@@ -77,6 +77,10 @@ def main():
     articles_cmd = [py, "generate_articles.py", "--type", "all", "--limit", str(args.limit)]
     run(articles_cmd, "STEP 2c: Generate SEO articles")
 
+    # Step 2d: Update blog schedule + featured article
+    blog_cmd = [py, "schedule_blog.py"]
+    run(blog_cmd, "STEP 2d: Update blog schedule (daily featured article)")
+
     if args.dry_run:
         print("\n--dry-run: Skipping git commit.")
         print("Done. review.html has been regenerated.")

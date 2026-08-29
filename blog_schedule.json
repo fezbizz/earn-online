@@ -1,0 +1,385 @@
+{
+  "start_date": "2026-08-29T09:00:00",
+  "cadence": "1x/day",
+  "total_articles": 42,
+  "articles": [
+    {
+      "slug": "affiliate-marketing-mistakes-beginners-make.html",
+      "title": "7 Affiliate Marketing Mistakes Beginners Make (And How to Avoid Them)",
+      "description": "The real mistakes that kill affiliate marketing beginners. No hype \u2014 just what goes wrong and how to fix it. Learn from others&#x27; failures.",
+      "url": "https://fezbizz.github.io/earn-online/blog/affiliate-marketing-mistakes-beginners-make.html",
+      "publish_date": "2026-08-29T09:00:00",
+      "day_number": 1,
+      "status": "published"
+    },
+    {
+      "slug": "affiliate-marketing-without-website.html",
+      "title": "Can You Do Affiliate Marketing Without a Website? (Honest Answer)",
+      "description": "Can you earn with affiliate marketing without a website? Yes, but there are trade-offs. Real methods, real limitations, no hype.",
+      "url": "https://fezbizz.github.io/earn-online/blog/affiliate-marketing-without-website.html",
+      "publish_date": "2026-08-30T09:00:00",
+      "day_number": 2,
+      "status": "scheduled"
+    },
+    {
+      "slug": "amp-joint-10-joint-support-offer-240-cpa-review-does-it-work.html",
+      "title": "AMP Joint 10 \u2013 Joint Support Offer | $240 CPA Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest AMP Joint 10 \u2013 Joint Support Offer | $240 CPA review. Real ClickBank data: $236.09 commission, $235.48 EPC, gravity 11. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/amp-joint-10-joint-support-offer-240-cpa-review-does-it-work.html",
+      "publish_date": "2026-08-31T09:00:00",
+      "day_number": 3,
+      "status": "scheduled"
+    },
+    {
+      "slug": "axavive-review-does-it-work.html",
+      "title": "Axavive Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Axavive review. Real ClickBank data: $189.46 commission, $196.88 EPC, gravity 1. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/axavive-review-does-it-work.html",
+      "publish_date": "2026-09-01T09:00:00",
+      "day_number": 4,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-clickbank-offers-2026.html",
+      "title": "Best ClickBank Offers to Promote in 2026 \u2014 Honest Review",
+      "description": "Real ClickBank offers ranked by commission, EPC, and gravity. No hype \u2014 just the numbers. Find the best affiliate offers to promote in 2026.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-clickbank-offers-2026.html",
+      "publish_date": "2026-09-02T09:00:00",
+      "day_number": 5,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-health-supplements-to-promote-2026.html",
+      "title": "Best Health Supplements to Promote as an Affiliate in 2026",
+      "description": "Top health supplement affiliate offers on ClickBank. Real EPC, commission, and gravity data. Which niches pay best and convert easiest.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-health-supplements-to-promote-2026.html",
+      "publish_date": "2026-09-03T09:00:00",
+      "day_number": 6,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-joint-pain-supplements-that-work.html",
+      "title": "Best Joint Pain Supplements That Actually Work (2026)",
+      "description": "Honest review of joint pain relief supplements on ClickBank. Real EPC and commission data. Which ones are worth promoting.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-joint-pain-supplements-that-work.html",
+      "publish_date": "2026-09-04T09:00:00",
+      "day_number": 7,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-make-money-online-programs-2026.html",
+      "title": "Best Make Money Online Programs (2026 \u2014 Honest, No Hype)",
+      "description": "Real review of make money online programs on ClickBank. Commission, EPC, gravity. Which ones work and which are garbage.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-make-money-online-programs-2026.html",
+      "publish_date": "2026-09-05T09:00:00",
+      "day_number": 8,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-self-help-products-clickbank.html",
+      "title": "Best Self-Help Products on ClickBank (2026 Honest Review)",
+      "description": "Real review of self-help and personal development products. Commission, EPC, gravity data. Which ones are worth your traffic.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-self-help-products-clickbank.html",
+      "publish_date": "2026-09-06T09:00:00",
+      "day_number": 9,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-sleep-aid-supplements-that-actually-work.html",
+      "title": "Best Sleep Aid Supplements That Actually Work (2026 Review)",
+      "description": "Honest review of the best sleep aid supplements on ClickBank. Real EPC, commission, and gravity data. No hype \u2014 just what works.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-sleep-aid-supplements-that-actually-work.html",
+      "publish_date": "2026-09-07T09:00:00",
+      "day_number": 10,
+      "status": "scheduled"
+    },
+    {
+      "slug": "best-weight-loss-supplements-clickbank.html",
+      "title": "Best Weight Loss Supplements on ClickBank (Honest 2026 Review)",
+      "description": "Real review of weight loss offers on ClickBank. Commission, EPC, gravity data. Which ones convert and which to avoid.",
+      "url": "https://fezbizz.github.io/earn-online/blog/best-weight-loss-supplements-clickbank.html",
+      "publish_date": "2026-09-08T09:00:00",
+      "day_number": 11,
+      "status": "scheduled"
+    },
+    {
+      "slug": "biofit-review-does-it-work.html",
+      "title": "BIOFIT Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest BIOFIT review. Real ClickBank data: $250.34 commission, $168.74 EPC, gravity 0. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/biofit-review-does-it-work.html",
+      "publish_date": "2026-09-09T09:00:00",
+      "day_number": 12,
+      "status": "scheduled"
+    },
+    {
+      "slug": "bloodarmor-powerful-blood-sugar-circulation-support-review-d.html",
+      "title": "BloodArmor\u2122 \u2013 Powerful Blood Sugar &amp; Circulation Support Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest BloodArmor\u2122 \u2013 Powerful Blood Sugar &amp; Circulation Support review. Real ClickBank data: $202.39 commission, $182.69 EPC, gravity 0. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/bloodarmor-powerful-blood-sugar-circulation-support-review-d.html",
+      "publish_date": "2026-09-10T09:00:00",
+      "day_number": 13,
+      "status": "scheduled"
+    },
+    {
+      "slug": "citrusburn-hot-new-weight-loss-supplement-for-2026-review-do.html",
+      "title": "CitrusBurn - HOT New WEIGHT LOSS Supplement For 2026 Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest CitrusBurn - HOT New WEIGHT LOSS Supplement For 2026 review. Real ClickBank data: $199.49 commission, $180.23 EPC, gravity 6. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/citrusburn-hot-new-weight-loss-supplement-for-2026-review-do.html",
+      "publish_date": "2026-09-11T09:00:00",
+      "day_number": 14,
+      "status": "scheduled"
+    },
+    {
+      "slug": "clickbank-gravity-vs-epc-which-matters.html",
+      "title": "ClickBank Gravity vs EPC: Which Number Actually Matters More?",
+      "description": "Gravity vs EPC on ClickBank \u2014 which should you care about? Real comparison with examples. Stop guessing, start using the right metric.",
+      "url": "https://fezbizz.github.io/earn-online/blog/clickbank-gravity-vs-epc-which-matters.html",
+      "publish_date": "2026-09-12T09:00:00",
+      "day_number": 15,
+      "status": "scheduled"
+    },
+    {
+      "slug": "clickbank-vs-other-affiliate-networks.html",
+      "title": "ClickBank vs Other Affiliate Networks (Which Is Best for Beginners?)",
+      "description": "Honest comparison of ClickBank, Amazon Associates, ShareASale, and CJ. Commission rates, ease of use, and which is best for beginners.",
+      "url": "https://fezbizz.github.io/earn-online/blog/clickbank-vs-other-affiliate-networks.html",
+      "publish_date": "2026-09-13T09:00:00",
+      "day_number": 16,
+      "status": "scheduled"
+    },
+    {
+      "slug": "dentabiome-clickbanks-first-oral-postbiotic-review-does-it-w.html",
+      "title": "DentaBiome - ClickBank&#x27;s First Oral Postbiotic Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest DentaBiome - ClickBank&#x27;s First Oral Postbiotic review. Real ClickBank data: $187.47 commission, $177.98 EPC, gravity 20. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/dentabiome-clickbanks-first-oral-postbiotic-review-does-it-w.html",
+      "publish_date": "2026-09-14T09:00:00",
+      "day_number": 17,
+      "status": "scheduled"
+    },
+    {
+      "slug": "dentalprime-2025s-fastest-growing-dental-supplement-review-d.html",
+      "title": "DentalPrime \u2013 2025\u2019s Fastest-Growing Dental Supplement Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest DentalPrime \u2013 2025\u2019s Fastest-Growing Dental Supplement review. Real ClickBank data: $190.42 commission, $263.17 EPC, gravity 0. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/dentalprime-2025s-fastest-growing-dental-supplement-review-d.html",
+      "publish_date": "2026-09-15T09:00:00",
+      "day_number": 18,
+      "status": "scheduled"
+    },
+    {
+      "slug": "dentolyn-untapped-dental-opportunity-review-does-it-work.html",
+      "title": "Dentolyn \u2013 Untapped Dental Opportunity Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Dentolyn \u2013 Untapped Dental Opportunity review. Real ClickBank data: $199.79 commission, $176.22 EPC, gravity 2. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/dentolyn-untapped-dental-opportunity-review-does-it-work.html",
+      "publish_date": "2026-09-16T09:00:00",
+      "day_number": 19,
+      "status": "scheduled"
+    },
+    {
+      "slug": "does-clickbank-actually-work.html",
+      "title": "Does ClickBank Actually Work? Honest Review for Beginners",
+      "description": "Is ClickBank legit or a scam? Real data, real commission numbers, real timeline. Read this before you sign up for ClickBank in 2026.",
+      "url": "https://fezbizz.github.io/earn-online/blog/does-clickbank-actually-work.html",
+      "publish_date": "2026-09-17T09:00:00",
+      "day_number": 20,
+      "status": "scheduled"
+    },
+    {
+      "slug": "every-swipe-pays-review-does-it-work.html",
+      "title": "Every Swipe Pays Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Every Swipe Pays review. Real ClickBank data: $926.64 commission, $472.28 EPC, gravity 1. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/every-swipe-pays-review-does-it-work.html",
+      "publish_date": "2026-09-18T09:00:00",
+      "day_number": 21,
+      "status": "scheduled"
+    },
+    {
+      "slug": "femicore-4-epc-doctor-endorsed-bladder-reset-formula-review-.html",
+      "title": "FemiCore - $4 EPC Doctor-Endorsed Bladder-Reset Formula Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest FemiCore - $4 EPC Doctor-Endorsed Bladder-Reset Formula review. Real ClickBank data: $204.56 commission, $212.55 EPC, gravity 65. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/femicore-4-epc-doctor-endorsed-bladder-reset-formula-review-.html",
+      "publish_date": "2026-09-19T09:00:00",
+      "day_number": 22,
+      "status": "scheduled"
+    },
+    {
+      "slug": "highest-paying-clickbank-offers-beginners.html",
+      "title": "Highest Paying ClickBank Offers for Beginners (2026 Real Data)",
+      "description": "Top ClickBank offers ranked by commission and EPC. Which high-paying offers actually convert. Honest data for beginners.",
+      "url": "https://fezbizz.github.io/earn-online/blog/highest-paying-clickbank-offers-beginners.html",
+      "publish_date": "2026-09-20T09:00:00",
+      "day_number": 23,
+      "status": "scheduled"
+    },
+    {
+      "slug": "how-long-does-affiliate-marketing-take.html",
+      "title": "How Long Does Affiliate Marketing Take to Earn Money? (Real Timeline)",
+      "description": "Honest timeline for affiliate marketing. When will you earn your first dollar? First $5/day? No fake promises \u2014 just the real numbers.",
+      "url": "https://fezbizz.github.io/earn-online/blog/how-long-does-affiliate-marketing-take.html",
+      "publish_date": "2026-09-21T09:00:00",
+      "day_number": 24,
+      "status": "scheduled"
+    },
+    {
+      "slug": "how-to-earn-5-dollars-per-day-online.html",
+      "title": "How to Earn $5 Per Day Online (Realistic, No Hype)",
+      "description": "Step-by-step plan to earn $5/day online with affiliate marketing. Free traffic, real timeline, no get-rich-quick garbage.",
+      "url": "https://fezbizz.github.io/earn-online/blog/how-to-earn-5-dollars-per-day-online.html",
+      "publish_date": "2026-09-22T09:00:00",
+      "day_number": 25,
+      "status": "scheduled"
+    },
+    {
+      "slug": "how-to-get-free-traffic-for-affiliate-links.html",
+      "title": "How to Get Free Traffic for Affiliate Links (9 Methods That Work)",
+      "description": "9 free traffic methods for affiliate marketing. No paid ads. SEO, YouTube, Pinterest, forums, and more. Real timelines and effort required.",
+      "url": "https://fezbizz.github.io/earn-online/blog/how-to-get-free-traffic-for-affiliate-links.html",
+      "publish_date": "2026-09-23T09:00:00",
+      "day_number": 26,
+      "status": "scheduled"
+    },
+    {
+      "slug": "how-to-write-affiliate-review-that-ranks.html",
+      "title": "How to Write an Affiliate Review That Actually Ranks on Google",
+      "description": "Step-by-step guide to writing affiliate reviews that rank on Google and convert readers into buyers. Real structure, real examples, no fluff.",
+      "url": "https://fezbizz.github.io/earn-online/blog/how-to-write-affiliate-review-that-ranks.html",
+      "publish_date": "2026-09-24T09:00:00",
+      "day_number": 27,
+      "status": "scheduled"
+    },
+    {
+      "slug": "kerafirm-pro-3-epc-doctor-backed-nail-fungus-solution-review.html",
+      "title": "KeraFirm Pro \u2013 $3+ EPC Doctor-Backed Nail Fungus Solution Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest KeraFirm Pro \u2013 $3+ EPC Doctor-Backed Nail Fungus Solution review. Real ClickBank data: $192.94 commission, $186.81 EPC, gravity 2. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/kerafirm-pro-3-epc-doctor-backed-nail-fungus-solution-review.html",
+      "publish_date": "2026-09-25T09:00:00",
+      "day_number": 28,
+      "status": "scheduled"
+    },
+    {
+      "slug": "kerassentials-unique-fungus-dropper-offer-review-does-it-wor.html",
+      "title": "Kerassentials - Unique Fungus Dropper Offer Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Kerassentials - Unique Fungus Dropper Offer review. Real ClickBank data: $202.70 commission, $182.99 EPC, gravity 29. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/kerassentials-unique-fungus-dropper-offer-review-does-it-wor.html",
+      "publish_date": "2026-09-26T09:00:00",
+      "day_number": 29,
+      "status": "scheduled"
+    },
+    {
+      "slug": "lymph-tonic-killer-new-lymphedemawater-retention-offer-revie.html",
+      "title": "LYMPH TONIC - Killer NEW Lymphedema/Water Retention Offer Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest LYMPH TONIC - Killer NEW Lymphedema/Water Retention Offer review. Real ClickBank data: $184.73 commission, $185.79 EPC, gravity 12. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/lymph-tonic-killer-new-lymphedemawater-retention-offer-revie.html",
+      "publish_date": "2026-09-27T09:00:00",
+      "day_number": 30,
+      "status": "scheduled"
+    },
+    {
+      "slug": "metabo-drops-the-juice-is-loose-review-does-it-work.html",
+      "title": "Metabo Drops - The Juice is Loose! Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Metabo Drops - The Juice is Loose! review. Real ClickBank data: $218.37 commission, $189.13 EPC, gravity 17. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/metabo-drops-the-juice-is-loose-review-does-it-work.html",
+      "publish_date": "2026-09-28T09:00:00",
+      "day_number": 31,
+      "status": "scheduled"
+    },
+    {
+      "slug": "mindoxa-unique-ingredients-review-does-it-work.html",
+      "title": "Mindoxa - Unique Ingredients Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Mindoxa - Unique Ingredients review. Real ClickBank data: $192.63 commission, $181.75 EPC, gravity 7. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/mindoxa-unique-ingredients-review-does-it-work.html",
+      "publish_date": "2026-09-29T09:00:00",
+      "day_number": 32,
+      "status": "scheduled"
+    },
+    {
+      "slug": "neuro-serge-review-does-it-work.html",
+      "title": "Neuro Serge Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Neuro Serge review. Real ClickBank data: $195.17 commission, $187.11 EPC, gravity 29. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/neuro-serge-review-does-it-work.html",
+      "publish_date": "2026-09-30T09:00:00",
+      "day_number": 33,
+      "status": "scheduled"
+    },
+    {
+      "slug": "online-success-coaching-pays-up-to-164775-per-sale-recurring.html",
+      "title": "Online Success Coaching - Pays Up To $1,647.75 Per Sale + Recurring Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Online Success Coaching - Pays Up To $1,647.75 Per Sale + Recurring review. Real ClickBank data: $345.49 commission, $287.90 EPC, gravity 2. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/online-success-coaching-pays-up-to-164775-per-sale-recurring.html",
+      "publish_date": "2026-10-01T09:00:00",
+      "day_number": 34,
+      "status": "scheduled"
+    },
+    {
+      "slug": "passive-income-affiliate-marketing-truth.html",
+      "title": "Passive Income Affiliate Marketing: The Honest Truth Nobody Tells You",
+      "description": "Is affiliate marketing really passive income? The honest answer. What&#x27;s passive, what&#x27;s not, and how long it takes to get there.",
+      "url": "https://fezbizz.github.io/earn-online/blog/passive-income-affiliate-marketing-truth.html",
+      "publish_date": "2026-10-02T09:00:00",
+      "day_number": 35,
+      "status": "scheduled"
+    },
+    {
+      "slug": "start-affiliate-marketing-no-money.html",
+      "title": "How to Start Affiliate Marketing with No Money (2026 Guide)",
+      "description": "Step-by-step guide to starting affiliate marketing with zero money. Free traffic methods, real timeline, no hype. Start earning online without spending a cent.",
+      "url": "https://fezbizz.github.io/earn-online/blog/start-affiliate-marketing-no-money.html",
+      "publish_date": "2026-10-03T09:00:00",
+      "day_number": 36,
+      "status": "scheduled"
+    },
+    {
+      "slug": "synadentix-unique-dental-chew-candy-review-does-it-work.html",
+      "title": "Synadentix - Unique Dental Chew Candy Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Synadentix - Unique Dental Chew Candy review. Real ClickBank data: $188.97 commission, $180.65 EPC, gravity 2. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/synadentix-unique-dental-chew-candy-review-does-it-work.html",
+      "publish_date": "2026-10-04T09:00:00",
+      "day_number": 37,
+      "status": "scheduled"
+    },
+    {
+      "slug": "sync-suns-out-guns-out-review-does-it-work.html",
+      "title": "Sync - Sun\u2019s Out, Guns Out!! Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Sync - Sun\u2019s Out, Guns Out!! review. Real ClickBank data: $277.33 commission, $190.19 EPC, gravity 0. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/sync-suns-out-guns-out-review-does-it-work.html",
+      "publish_date": "2026-10-05T09:00:00",
+      "day_number": 38,
+      "status": "scheduled"
+    },
+    {
+      "slug": "venus-factor-the-beast-is-back-review-does-it-work.html",
+      "title": "Venus Factor -  The Beast is BACK Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest Venus Factor -  The Beast is BACK review. Real ClickBank data: $211.40 commission, $196.34 EPC, gravity 16. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/venus-factor-the-beast-is-back-review-does-it-work.html",
+      "publish_date": "2026-10-06T09:00:00",
+      "day_number": 39,
+      "status": "scheduled"
+    },
+    {
+      "slug": "viriflow-huge-epc-with-our-bph-power-offer-review-does-it-wo.html",
+      "title": "ViriFlow \u2013 Huge EPC With Our BPH Power Offer Review \u2014 Does It Actually Work? (Real Data)",
+      "description": "Honest ViriFlow \u2013 Huge EPC With Our BPH Power Offer review. Real ClickBank data: $215.25 commission, $204.04 EPC, gravity 6. Does it work? Read before you buy.",
+      "url": "https://fezbizz.github.io/earn-online/blog/viriflow-huge-epc-with-our-bph-power-offer-review-does-it-wo.html",
+      "publish_date": "2026-10-07T09:00:00",
+      "day_number": 40,
+      "status": "scheduled"
+    },
+    {
+      "slug": "what-is-epc-and-why-it-matters-affiliate.html",
+      "title": "What Is EPC in Affiliate Marketing? (And Why It&#x27;s the Only Number That Matters)",
+      "description": "EPC explained simply. What it means, how to use it, and why it&#x27;s more important than commission rate. Real ClickBank examples.",
+      "url": "https://fezbizz.github.io/earn-online/blog/what-is-epc-and-why-it-matters-affiliate.html",
+      "publish_date": "2026-10-08T09:00:00",
+      "day_number": 41,
+      "status": "scheduled"
+    },
+    {
+      "slug": "what-is-gravity-score-clickbank-explained.html",
+      "title": "What Is Gravity Score on ClickBank? (Simple Explanation for Beginners)",
+      "description": "ClickBank gravity score explained simply. What it means, what a good gravity score is, and why it matters for choosing affiliate offers.",
+      "url": "https://fezbizz.github.io/earn-online/blog/what-is-gravity-score-clickbank-explained.html",
+      "publish_date": "2026-10-09T09:00:00",
+      "day_number": 42,
+      "status": "scheduled"
+    }
+  ]
+}
