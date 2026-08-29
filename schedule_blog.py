@@ -65,22 +65,38 @@ def save_schedule(schedule):
 
 
 def build_schedule():
-    """Build a daily schedule from all blog articles."""
+    """Build a daily schedule from all blog articles — buyer reviews first, tutorials last."""
     if not BLOG_DIR.exists():
         print("ERROR: blog/ directory not found")
         return None
 
-    articles = []
-    for f in sorted(BLOG_DIR.glob("*.html")):
+    buyer_reviews = []
+    buyer_lists = []
+    tutorials = []
+
+    for f in BLOG_DIR.glob("*.html"):
         html_text = f.read_text(encoding="utf-8")
         title = extract_title_from_html(html_text)
         desc = extract_desc_from_html(html_text)
-        articles.append({
+        entry = {
             "slug": f.name,
             "title": title,
             "description": desc,
             "url": f"{BASE_URL}/blog/{f.name}",
-        })
+        }
+        name_lower = f.name.lower()
+        if "really work" in title.lower() or ("review" in name_lower and "does-it-work" in name_lower):
+            buyer_reviews.append(entry)
+        elif name_lower.startswith("best-") and "clickbank" not in name_lower and "affiliate" not in name_lower:
+            buyer_lists.append(entry)
+        else:
+            tutorials.append(entry)
+
+    # Order: buyer reviews first, then buyer lists, then tutorials last
+    buyer_reviews.sort(key=lambda x: x["title"])
+    buyer_lists.sort(key=lambda x: x["title"])
+    tutorials.sort(key=lambda x: x["title"])
+    articles = buyer_reviews + buyer_lists + tutorials
 
     # Assign each article to a day, starting today
     today = datetime.now().replace(hour=9, minute=0, second=0, microsecond=0)
