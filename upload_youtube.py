@@ -82,8 +82,8 @@ def get_youtube_service():
     return build("youtube", "v3", credentials=creds)
 
 
-def upload_video(youtube, video_path, script_path):
-    """Upload a single video to YouTube."""
+def upload_video(youtube, video_path, script_path, publish_at=None):
+    """Upload a single video to YouTube. If publish_at is set, video is scheduled."""
     from googleapiclient.http import MediaFileUpload
 
     with open(script_path, encoding="utf-8") as f:
@@ -93,6 +93,21 @@ def upload_video(youtube, video_path, script_path):
     description = script.get("description", "")
     tags = script.get("tags", [])
 
+    # If publish_at is set, use "private" with publishAt for scheduling
+    if publish_at:
+        # YouTube requires ISO 8601 format with timezone
+        status = {
+            "privacyStatus": "private",
+            "selfDeclaredMadeForKids": False,
+            "publishAt": publish_at,
+        }
+        print(f"  Scheduling for: {publish_at}")
+    else:
+        status = {
+            "privacyStatus": "public",
+            "selfDeclaredMadeForKids": False,
+        }
+
     body = {
         "snippet": {
             "title": title,
@@ -100,10 +115,7 @@ def upload_video(youtube, video_path, script_path):
             "tags": tags,
             "categoryId": "22",  # People & Blogs
         },
-        "status": {
-            "privacyStatus": "public",
-            "selfDeclaredMadeForKids": False,
-        },
+        "status": status,
     }
 
     media = MediaFileUpload(
@@ -136,6 +148,7 @@ def main():
     parser.add_argument("--video", type=str, help="Video slug (e.g. 'ampjoint')")
     parser.add_argument("--all", action="store_true", help="Upload all videos")
     parser.add_argument("--dry-run", action="store_true", help="Show what would upload")
+    parser.add_argument("--schedule", action="store_true", help="Schedule videos 3x/week (Mon/Wed/Fri 3PM)")
     args = parser.parse_args()
 
     if not args.video and not args.all:
@@ -186,10 +199,18 @@ def main():
     youtube = get_youtube_service()
     print(f"\nAuthenticated. Starting uploads...\n")
 
+    # If scheduling, calculate upload dates
+    upload_dates = None
+    if args.schedule:
+        from upload_schedule import get_upload_dates
+        upload_dates = get_upload_dates(len(videos))
+        print(f"Schedule mode: {len(videos)} videos on Mon/Wed/Fri at 3:00 PM\n")
+
     uploaded = []
-    for mp4, script in videos:
+    for i, (mp4, script) in enumerate(videos):
         try:
-            url = upload_video(youtube, mp4, script)
+            publish_at = upload_dates[i].isoformat() if upload_dates else None
+            url = upload_video(youtube, mp4, script, publish_at=publish_at)
             uploaded.append(url)
             # Rate limit: wait between uploads
             if len(videos) > 1:
