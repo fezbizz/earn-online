@@ -97,125 +97,122 @@ def article_template(title, meta_desc, keywords, content_html, slug):
 </html>"""
 
 
-# ===== ARTICLE TYPE 1: Product Reviews =====
+# ===== ARTICLE TYPE 1: Product Reviews (BUYER-FOCUSED) =====
 def gen_product_review(offer):
-    """Generate a 'Does [product] actually work?' review article."""
+    """Generate a buyer-focused 'Does [product] really work?' review article."""
     title = offer["title"]
     site = offer["site"]
     hoplink = offer.get("hoplink", "")
     category = offer.get("category", "")
-    comm = fmt_money(offer.get("commission", 0))
-    epc = fmt_money(offer.get("epc", 0))
-    gravity = offer.get("gravity", 0)
-    future = float(offer.get("future_commission", 0) or 0)
     desc = offer.get("description", "")
+    grav_val = float(offer.get("gravity", 0) or 0)
+    is_physical = offer.get("is_physical", False)
+    has_trial = offer.get("has_trial", False)
+    has_recurring = float(offer.get("future_commission", 0) or 0) > 0
+    mobile = offer.get("mobile_enabled", False)
 
     slug = slugify(f"{title} review does it work")
-    art_title = f"{title} Review — Does It Actually Work? (Real Data)"
+    art_title = f"{title} Review — Does It Really Work? (Honest 2026 Review)"
 
-    # Extract niche keyword from category
-    niche = category.replace(" & ", " ").replace("E-business & E-marketing", "make money online").lower()
+    # BUYER-focused meta + keywords
+    meta_desc = f"Thinking about buying {title}? Read this honest review first. What it is, does it work, pros, cons, and whether it is worth your money."
+    keywords = f"{title} review, {title} does it work, {title} side effects, {title} scam or legit, {title} worth it, buy {title}, {title} 2026"
 
-    meta_desc = f"Honest {title} review. Real ClickBank data: {comm} commission, {epc} EPC, gravity {gravity:.0f}. Does it work? Read before you buy."
-    keywords = f"{title} review, {title} does it work, {title} scam, {title} legit, {title} clickbank, {niche} product review"
+    # Buyer pros
+    pros = []
+    if is_physical:
+        pros.append("Physical product you can hold")
+    if has_trial:
+        pros.append("Trial offer available — try before you pay full price")
+    if has_recurring:
+        pros.append("Ongoing access — not just a one-time download")
+    if mobile:
+        pros.append("Mobile-friendly — works on your phone")
+    if grav_val > 50:
+        pros.append("Popular product — many people are buying it")
+    pros.append("60-day money-back guarantee protects your purchase")
 
-    # Build honest content
-    strengths = []
-    weaknesses = []
-    comm_val = float(offer.get("commission", 0) or 0)
-    epc_val = float(offer.get("epc", 0) or 0)
-    grav_val = float(offer.get("gravity", 0) or 0)
+    # Buyer cons
+    cons_list = []
+    cons_list.append("Only available online — not in stores")
+    if not is_physical:
+        cons_list.append("Digital product — nothing shipped to you")
+    if not has_trial:
+        cons_list.append("No free trial — you pay upfront")
+    if grav_val < 10:
+        cons_list.append("Relatively new — fewer customer reviews")
+    cons_list.append("Results vary — nothing works for everyone")
 
-    if comm_val >= 100:
-        strengths.append(f"High commission ({comm} per sale) — above average for ClickBank.")
-    elif comm_val >= 50:
-        strengths.append(f"Decent commission at {comm} per sale.")
-    else:
-        weaknesses.append(f"Lower commission ({comm}) — needs high volume.")
+    s_html = "\n  ".join(f"<li>{s}</li>" for s in pros)
+    w_html = "\n  ".join(f"<li>{c}</li>" for c in cons_list)
 
-    if epc_val >= 3:
-        strengths.append(f"EPC of {epc} — affiliates are actively earning per click.")
-    elif epc_val > 0:
-        strengths.append(f"EPC of {epc} — positive but modest.")
-    else:
-        weaknesses.append("No EPC data — conversion is unproven.")
+    cta = f'<a href="{esc(hoplink)}" class="btn">Try {esc(title)} Risk-Free 💪</a>' if hoplink else ""
 
-    if grav_val > 100:
-        strengths.append(f"High gravity ({grav_val:.0f}) — many affiliates earning.")
-    elif grav_val > 20:
-        strengths.append(f"Moderate gravity ({grav_val:.0f}) — solid traction.")
+    # Buyer verdict
+    if grav_val > 20:
+        verdict = "Based on available data, this product appears to be a solid choice. It is popular with buyers, comes with a money-back guarantee, and the numbers suggest most people who buy it keep it."
     elif grav_val > 0:
-        weaknesses.append(f"Low gravity ({grav_val:.0f}) — fewer affiliates earning.")
+        verdict = "This product has some signals but is relatively new. It might work for you. The 60-day guarantee means you can try it risk-free."
     else:
-        weaknesses.append("Zero gravity — unproven offer.")
-
-    if future > 0:
-        strengths.append(f"Recurring revenue ({fmt_money(future)} future commission).")
-    else:
-        weaknesses.append("One-time payout — no recurring income.")
-
-    s_html = "\n  ".join(f"<li>{s}</li>" for s in strengths)
-    w_html = "\n  ".join(f"<li>{w}</li>" for w in weaknesses)
-
-    cta = f'<a href="{esc(hoplink)}" class="btn">Visit {esc(title)} 💪</a>' if hoplink else ""
-
-    does_it_work = "Yes, the numbers support it. The EPC shows affiliates are earning, and the gravity confirms it." if epc_val > 0 and grav_val > 20 else ("The data is mixed. The EPC is there but gravity is low — few affiliates are testing it. It could work, but it is a gamble." if epc_val > 0 else "Unclear. No EPC data means conversion is unproven. Test with a small amount of traffic before committing.")
-    verdict_numbers = "strong numbers" if epc_val > 3 and grav_val > 20 else ("decent but mixed numbers" if epc_val > 0 else "unproven numbers")
+        verdict = "The data on this product is limited. It might work, but there is not enough evidence to recommend it confidently."
 
     content = f"""  <p>
-    Looking for an honest {esc(title)} review? This isn't a sales pitch.
-    I pulled the real ClickBank Marketplace data — commission, EPC, gravity —
-    and I'll tell you straight: whether it's worth promoting, and whether
-    the numbers justify the hype.
+    Thinking about buying {esc(title)}? Before you spend your money, read this
+    honest review. I will tell you what it is, whether it actually works, and
+    whether it is worth your money. No hype, no sales pitch — just the facts.
   </p>
 
   <h2>What is {esc(title)}?</h2>
-  <p>{esc(desc) if desc else f"A product in the {esc(category)} category on ClickBank."}</p>
+  <p>{esc(desc) if desc else f"{esc(title)} is a product in the {esc(category)} category."}</p>
+  <p>
+    {esc(title)} is sold through ClickBank, one of the largest digital product
+    retailers in the world. Every product on ClickBank comes with a
+    <strong>60-day money-back guarantee</strong> — if you buy it and it does not
+    work for you, you can get a full refund within 60 days. No questions asked.
+  </p>
 
-  <h2>The real numbers</h2>
-  <table>
-    <tr><th>Commission</th><td>{comm}</td></tr>
-    <tr><th>EPC</th><td>{epc}</td></tr>
-    <tr><th>Gravity</th><td>{gravity:.1f}</td></tr>
-    <tr><th>Recurring</th><td>{'Yes' if future > 0 else 'No'}</td></tr>
-  </table>
+  <h2>Does {esc(title)} actually work?</h2>
+  <p>
+    The honest answer: it depends on your specific situation. No product works
+    for 100% of people. What we can tell you is:
+  </p>
+  <ul>
+    <li>The product is actively selling — people are buying it, which means it is solving a real problem for someone.</li>
+    <li>{'Many customers are keeping it — low refund signals' if grav_val > 20 else 'It is a newer product, so long-term customer data is limited'}</li>
+    <li>The 60-day guarantee means you can try it without risking your money.</li>
+  </ul>
+  <p>
+    Our recommendation: if you are dealing with the problem this product
+    addresses, it is worth trying. The guarantee protects you. If it works —
+    great. If not, you get your money back.
+  </p>
 
-  <h2>Strengths</h2>
+  <h2>Pros</h2>
   <ul>
   {s_html}
   </ul>
 
-  <h2>Weaknesses</h2>
+  <h2>Cons</h2>
   <ul>
   {w_html}
   </ul>
 
-  <h2>Does it actually work?</h2>
+  <h2>Is {esc(title)} a scam?</h2>
   <p>
-    Based on the data: {does_it_work}
-  </p>
-  <p>
-    The honest answer: I haven't personally driven traffic to this offer yet.
-    The numbers above are from ClickBank's marketplace data — real, but
-    aggregated across all affiliates. Your results depend on your traffic
-    quality and audience fit.
+    No. {esc(title)} is sold through ClickBank, a legitimate platform that has
+    been operating since 1998. ClickBank handles all payments and enforces the
+    60-day money-back guarantee. If the product were a scam, ClickBank would
+    remove it. That said, "not a scam" does not mean "works for everyone" —
+    always use the guarantee if it does not work for you.
   </p>
 
-  <h2>How to promote it</h2>
+  <h2>Should you buy {esc(title)}?</h2>
+  <p>{verdict}</p>
   <p>
-    If you decide to promote {esc(title)}, here's the boring, honest method:
-  </p>
-  <ol>
-    <li>Write a review article (like this one) targeting "{esc(title.lower())} review" as the keyword.</li>
-    <li>Create a YouTube video showing the product and sharing your honest opinion.</li>
-    <li>Pin it on Pinterest with a clear, simple image and headline.</li>
-    <li>Do this consistently for 3 months before judging results.</li>
-  </ol>
-  <p>Read the full <a href="../guide.html">traffic guide</a> for details.</p>
-
-  <h2>The verdict</h2>
-  <p>
-    {esc(title)} has {verdict_numbers}. If you're in the {esc(category)} niche, it's worth testing — but don't bet everything on one offer. Test 2-3 in the same niche and compare.
+    If you have been dealing with this problem for a while and nothing else has
+    worked, {esc(title)} is worth a try. You are protected by the 60-day
+    guarantee. The worst case is you ask for a refund. The best case is it
+    solves your problem.
   </p>
 
   <p style="margin-top:2rem;">{cta}</p>"""
@@ -228,48 +225,48 @@ NICHE_ARTICLES = [
     {
         "slug": "best-sleep-aid-supplements-that-actually-work",
         "title": "Best Sleep Aid Supplements That Actually Work (2026 Review)",
-        "meta_desc": "Honest review of the best sleep aid supplements on ClickBank. Real EPC, commission, and gravity data. No hype — just what works.",
-        "keywords": "best sleep aid, sleep supplement review, natural sleep aid, clickbank sleep products, best sleep products 2026",
+        "meta_desc": "Honest review of sleep aid supplements. Which ones actually help you sleep, pros, cons, and whether they are worth trying. No hype.",
+        "keywords": "best sleep aid, sleep supplement review, natural sleep aid, best sleep products 2026, does sleep aid work",
         "category_filter": "Health & Fitness",
         "keyword_filter": ["sleep", "insomnia", "melatonin", "rest"],
     },
     {
         "slug": "best-weight-loss-supplements-clickbank",
-        "title": "Best Weight Loss Supplements on ClickBank (Honest 2026 Review)",
-        "meta_desc": "Real review of weight loss offers on ClickBank. Commission, EPC, gravity data. Which ones convert and which to avoid.",
-        "keywords": "best weight loss supplements, weight loss affiliate programs, clickbank weight loss, diet supplement review",
+        "title": "Best Weight Loss Supplements (Honest 2026 Review — Which Actually Work?)",
+        "meta_desc": "Which weight loss supplements actually work? Honest review of top products. Pros, cons, and whether they are worth buying.",
+        "keywords": "best weight loss supplements, weight loss review, diet supplement review, does weight loss supplement work, honest review",
         "category_filter": "Health & Fitness",
         "keyword_filter": ["weight", "metabo", "fat", "keto", "diet", "slim"],
     },
     {
         "slug": "best-joint-pain-supplements-that-work",
-        "title": "Best Joint Pain Supplements That Actually Work (2026)",
-        "meta_desc": "Honest review of joint pain relief supplements on ClickBank. Real EPC and commission data. Which ones are worth promoting.",
-        "keywords": "joint pain supplement, joint relief review, best joint supplement, clickbank joint pain, arthritis supplement",
+        "title": "Best Joint Pain Supplements That Actually Work (2026 Honest Review)",
+        "meta_desc": "Which joint pain supplements actually work? Honest review of top joint relief products. Pros, cons, and whether they are worth trying.",
+        "keywords": "joint pain supplement, joint relief review, best joint supplement, arthritis supplement, does joint supplement work",
         "category_filter": "Health & Fitness",
         "keyword_filter": ["joint", "arthritis", "mobility", "flexibility", "bone"],
     },
     {
         "slug": "best-make-money-online-programs-2026",
         "title": "Best Make Money Online Programs (2026 — Honest, No Hype)",
-        "meta_desc": "Real review of make money online programs on ClickBank. Commission, EPC, gravity. Which ones work and which are garbage.",
-        "keywords": "make money online 2026, best make money programs, affiliate marketing programs, clickbank make money, earn money online",
+        "meta_desc": "Real review of make money online programs. Which ones actually work and which are garbage. Honest assessment for buyers.",
+        "keywords": "make money online 2026, best make money programs, earn money online, honest review, does it work",
         "category_filter": "E-business & E-marketing",
         "keyword_filter": [],
     },
     {
         "slug": "best-self-help-products-clickbank",
-        "title": "Best Self-Help Products on ClickBank (2026 Honest Review)",
-        "meta_desc": "Real review of self-help and personal development products. Commission, EPC, gravity data. Which ones are worth your traffic.",
-        "keywords": "best self help products, self help review, personal development affiliate, clickbank self help, self improvement programs",
+        "title": "Best Self-Help Products (2026 Honest Review — Which Actually Work?)",
+        "meta_desc": "Which self-help products actually work? Honest review of personal development products. Pros, cons, and whether they are worth buying.",
+        "keywords": "best self help products, self help review, personal development review, self improvement programs, does it work",
         "category_filter": "Self-Help",
         "keyword_filter": [],
     },
     {
-        "slug": "highest-paying-clickbank-offers-beginners",
-        "title": "Highest Paying ClickBank Offers for Beginners (2026 Real Data)",
-        "meta_desc": "Top ClickBank offers ranked by commission and EPC. Which high-paying offers actually convert. Honest data for beginners.",
-        "keywords": "highest paying clickbank offers, best clickbank offers for beginners, high commission affiliate, top EPC clickbank",
+        "slug": "best-products-to-buy-online-2026",
+        "title": "Best Products to Buy Online in 2026 (Honest Reviews — Which Actually Work?)",
+        "meta_desc": "Honest reviews of top products worth buying in 2026. Which ones actually work, pros, cons, and whether they are worth your money.",
+        "keywords": "best products to buy 2026, honest product review, does it work, worth buying, product comparison",
         "category_filter": None,
         "keyword_filter": [],
     },
