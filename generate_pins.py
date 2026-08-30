@@ -15,7 +15,7 @@ Usage:
 
 To use on Pinterest:
     1. Create a free Pinterest business account
-    2. Create a board called "Affiliate Marketing Reviews" or "Earn Extra Online"
+    2. Create a board called "Honest Product Reviews"
     3. Upload each pin image with its title + description + link
     4. Pin 3-5 per day for steady traffic
 """
@@ -95,9 +95,9 @@ def generate_pin_image(title, subtitle, output_path):
 
     # Brand text at top
     brand_font = get_font(28, bold=True)
-    draw.text((50, 40), "EARN EXTRA ONLINE", fill=ACCENT_COLOR, font=brand_font)
+    draw.text((50, 40), "HONEST PRODUCT REVIEWS", fill=ACCENT_COLOR, font=brand_font)
     sub_brand_font = get_font(24, bold=False)
-    draw.text((50, 75), "Real, Boring Systems", fill=DIM_COLOR, font=sub_brand_font)
+    draw.text((50, 75), "Does It Really Work?", fill=DIM_COLOR, font=sub_brand_font)
 
     # Main title — wrapped and centered
     title_font = get_font(56, bold=True)
@@ -156,7 +156,7 @@ def generate_pin_image(title, subtitle, output_path):
 
     # CTA at bottom
     cta_font = get_font(36, bold=True)
-    cta_text = "Full review — link in description"
+    cta_text = "Does It Really Work? — Link below"
     bbox = draw.textbbox((0, 0), cta_text, font=cta_font)
     w = bbox[2] - bbox[0]
     x = (PIN_WIDTH - w) // 2
@@ -244,7 +244,7 @@ def main():
         print(f"  Pin data: pinterest/pins.json")
         print(f"\nTo use on Pinterest:")
         print(f"  1. Create a free Pinterest business account")
-        print(f"  2. Create a board: 'Affiliate Marketing Reviews'")
+        print(f"  2. Create a board: 'Honest Product Reviews'")
         print(f"  3. Upload each pin with title + description from pins.json")
         print(f"  4. Pin 3-5 per day for steady traffic")
 
