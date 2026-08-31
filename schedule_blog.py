@@ -167,7 +167,7 @@ def generate_blog_index(schedule):
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Blog — All Articles | Honest Product Reviews</title>
-  <meta name="description" content="All affiliate marketing articles — honest reviews, guides, and tutorials. Published daily.">
+  <meta name="description" content="Honest product reviews and buying guides. Does it really work? Is it a scam? Should you buy it? Published daily.">
   <meta name="robots" content="index, follow">
   <meta property="og:title" content="Blog — Honest Product Reviews">
   <meta property="og:type" content="website">
@@ -189,7 +189,7 @@ def generate_blog_index(schedule):
   <h1>Blog — All Articles</h1>
 
   <p>
-    Honest affiliate marketing articles — reviews, guides, and tutorials.
+    Honest product reviews and buying guides — does it really work?
     One new article featured every day. {len(schedule['articles'])} articles total.
   </p>
 
