@@ -90,8 +90,8 @@ def generate_review_page(offer):
             "ratingValue": max(1, min(5, round(float(offer.get("score", 0)) * 5))),
             "bestRating": 5,
         },
-        "author": {"@type": "Organization", "name": "Earn Extra Online"},
-        "publisher": {"@type": "Organization", "name": "Earn Extra Online"},
+        "author": {"@type": "Organization", "name": "Honest Product Reviews"},
+        "publisher": {"@type": "Organization", "name": "Honest Product Reviews"},
     }
 
     # Build buyer-focused content
@@ -171,7 +171,7 @@ def generate_review_page(offer):
 </head>
 <body>
 
-  <div class="site-header"><span class="brand">Earn Extra Online — Real, Boring Systems</span></div>
+  <div class="site-header"><span class="brand">Honest Product Reviews</span></div>
 
   <nav>
     <a href="../index.html">Home</a>
@@ -260,7 +260,7 @@ def generate_review_page(offer):
   </p>
 
   <footer>
-    <p>Earn Extra Online — Real, Boring Systems</p>
+    <p>Honest Product Reviews</p>
     <p class="disclosure">
       This site uses affiliate links. I may earn a commission if you click
       a link and purchase a product. This never affects the price you pay.

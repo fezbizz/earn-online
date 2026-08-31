@@ -70,7 +70,7 @@ def extract_title_from_html(html_text):
     if match:
         title = match.group(1).strip()
         # Clean up common suffixes
-        for suffix in [" | Honest Product Reviews", " — Honest Product Reviews", " | Earn Extra Online", " — Real, Boring Systems"]:
+        for suffix in [" | Honest Product Reviews", " — Honest Product Reviews", " | Honest Product Reviews", " — Honest Product Reviews"]:
             if title.endswith(suffix):
                 title = title[:-len(suffix)]
         return title

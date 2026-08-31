@@ -72,7 +72,7 @@ def article_template(title, meta_desc, keywords, content_html, slug):
   <link rel="stylesheet" href="../assets/styles.css">
 </head>
 <body>
-  <div class="site-header"><span class="brand">Earn Extra Online — Real, Boring Systems</span></div>
+  <div class="site-header"><span class="brand">Honest Product Reviews</span></div>
   <nav>
     <a href="../index.html">Home</a>
     <a href="../review.html">Reviews</a>
@@ -89,7 +89,7 @@ def article_template(title, meta_desc, keywords, content_html, slug):
     <strong>Related:</strong> <a href="../review.html">All reviews</a> | <a href="../guide.html">Traffic guide</a> | <a href="../index.html">Home</a>
   </p>
   <footer>
-    <p>Earn Extra Online — Real, Boring Systems</p>
+    <p>Honest Product Reviews</p>
     <p class="disclosure">This site uses affiliate links. I may earn a commission. I do not guarantee any income results.</p>
     <p>Built honest. 💪</p>
   </footer>

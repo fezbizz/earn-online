@@ -38,7 +38,7 @@ def extract_title_from_html(html_text):
     match = re.search(r"<title>(.*?)</title>", html_text, re.I | re.DOTALL)
     if match:
         title = match.group(1).strip()
-        for suffix in [" | Earn Extra Online", " — Real, Boring Systems"]:
+        for suffix in [" | Honest Product Reviews", " — Honest Product Reviews"]:
             if title.endswith(suffix):
                 title = title[:-len(suffix)]
         return title
@@ -166,10 +166,10 @@ def generate_blog_index(schedule):
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Blog — All Articles | Earn Extra Online</title>
+  <title>Blog — All Articles | Honest Product Reviews</title>
   <meta name="description" content="All affiliate marketing articles — honest reviews, guides, and tutorials. Published daily.">
   <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Blog — Earn Extra Online">
+  <meta property="og:title" content="Blog — Honest Product Reviews">
   <meta property="og:type" content="website">
   <meta property="og:url" content="{BASE_URL}/blog.html">
   <link rel="canonical" href="{BASE_URL}/blog.html">
@@ -177,7 +177,7 @@ def generate_blog_index(schedule):
 </head>
 <body>
 
-  <div class="site-header"><span class="brand">Earn Extra Online — Real, Boring Systems</span></div>
+  <div class="site-header"><span class="brand">Honest Product Reviews</span></div>
 
   <nav>
     <a href="index.html">Home</a>
@@ -200,7 +200,7 @@ def generate_blog_index(schedule):
 {cards_html}
 
   <footer>
-    <p>Earn Extra Online — Real, Boring Systems</p>
+    <p>Honest Product Reviews</p>
     <p class="disclosure">This site uses affiliate links. I may earn a commission. I do not guarantee any income results.</p>
     <p>Built honest. 💪</p>
   </footer>
