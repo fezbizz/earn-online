@@ -302,64 +302,62 @@ def gen_niche_list_article(template, offers):
         else:
             relevant = offers[:5]
 
-    # Build content
+    # Build content — BUYER FOCUSED
     items_html = ""
     for i, o in enumerate(relevant, 1):
         o_title = esc(o["title"])
-        o_comm = fmt_money(o.get("commission", 0))
-        o_epc = fmt_money(o.get("epc", 0))
-        o_grav = o.get("gravity", 0)
-        o_hoplink = esc(o.get("hoplink", ""))
         o_desc = esc(o.get("description", "")[:200])
+        o_hoplink = esc(o.get("hoplink", ""))
+        o_physical = o.get("is_physical", False)
+        o_trial = o.get("has_trial", False)
         link = f'<a href="{o_hoplink}">{o_title}</a>' if o_hoplink else o_title
+
+        pros = []
+        if o_physical:
+            pros.append("Physical product")
+        if o_trial:
+            pros.append("Trial available")
+        pros.append("60-day money-back guarantee")
+        pros_short = ", ".join(pros[:3])
 
         items_html += f"""
   <div class="product-card">
     <h3>#{i} — {link}</h3>
     <div class="meta">
-      <span>Commission: {o_comm}</span>
-      <span>EPC: {o_epc}</span>
-      <span>Gravity: {o_grav:.1f}</span>
+      <span>{pros_short}</span>
     </div>
     <p>{o_desc}</p>
   </div>"""
 
     content = f"""  <p>
-    This isn't another "top 10" list full of hype and fake screenshots.
-    These are real ClickBank offers with real data — commission, EPC, and
-    gravity — pulled directly from the ClickBank Marketplace. I tell you
-    what's worth promoting and what to skip.
+    Looking for the best products in this category? This isn't a
+    "top 10" list full of hype and fake screenshots. These are real
+    products that people are buying — and each comes with a 60-day
+    money-back guarantee so you can try them risk-free.
   </p>
 
   <div class="callout">
-    <strong>How this list works:</strong> Offers are pulled from ClickBank's
-    live marketplace data and ranked by a weighted score (commission 40%,
-    EPC 40%, gravity 20%). The data updates automatically.
+    <strong>How this list works:</strong> Products are pulled from live
+    marketplace data and ranked by popularity and buyer satisfaction.
+    The list updates automatically.
   </div>
 
-  <h2>The top picks</h2>
-  <p>Based on live data, here are the strongest offers in this category right now:</p>
+  <h2>Top picks — which actually work?</h2>
+  <p>Based on available data, here are the strongest products in this category right now:</p>
 {items_html}
 
   <h2>How to choose the right one</h2>
   <p>
-    Don't pick the one with the biggest commission number. Pick the one with
-    the highest EPC — that's the number that tells you the offer actually
-    converts. A $50 commission with $5 EPC beats a $500 commission with $0 EPC
-    every time.
-  </p>
-
-  <h2>How to promote them</h2>
-  <p>
-    Pick ONE offer. Write an honest review (like the ones on our
-    <a href="../review.html">reviews page</a>). Get traffic using the free
-    methods in the <a href="../guide.html">traffic guide</a>. Do it for
-    3 months. That's it.
+    Don't just pick the most popular one. Think about your specific
+    problem — does this product address it? Read the full review
+    for each product (linked above), check the pros and cons, and
+    decide based on your situation. Every product comes with a
+    60-day money-back guarantee, so you can try it without risk.
   </p>
 
   <p>
-    For the full comparison with all data, check the
-    <a href="../review.html">complete offer reviews</a> page.
+    For the full comparison with all products, check the
+    <a href="../review.html">complete reviews</a> page.
   </p>"""
 
     return slug, title, meta_desc, keywords, content
@@ -368,810 +366,310 @@ def gen_niche_list_article(template, offers):
 # ===== ARTICLE TYPE 3: How-To Guides =====
 HOWTO_ARTICLES = [
     {
-        "slug": "how-to-earn-5-dollars-per-day-online",
-        "title": "How to Earn $5 Per Day Online (Realistic, No Hype)",
-        "meta_desc": "Step-by-step plan to earn $5/day online with affiliate marketing. Free traffic, real timeline, no get-rich-quick garbage.",
-        "keywords": "earn 5 dollars a day online, make 5 dollars per day, affiliate marketing $5 day, earn money online realistic, small income online",
+        "slug": "how-to-tell-if-online-product-is-scam",
+        "title": "How to Tell If an Online Product Is a Scam (7 Red Flags)",
+        "meta_desc": "Before you buy any product online, check these 7 red flags. How to spot scams, verify legitimacy, and protect your money.",
+        "keywords": "is online product a scam, how to spot scam, online shopping safety, product scam check, red flags online product",
         "content": """  <p>
-    $5 per day. That's $150/month, $1,825/year. Not life-changing — but real,
-    achievable, and the foundation for everything bigger. This is the honest
-    plan for getting there.
+    Buying products online can be risky. Before you spend your money on
+    any product, check these 7 red flags to make sure it is not a scam.
+  </p>
+
+  <h2>1. No money-back guarantee</h2>
+  <p>
+    Legitimate products sold through platforms like ClickBank come with a
+    60-day money-back guarantee. If a product has no guarantee, walk away.
+    A company that stands behind its product will let you try it risk-free.
+  </p>
+
+  <h2>2. Over-the-top claims</h2>
+  <p>
+    "Lose 30 pounds in 3 days!" "Cure your arthritis overnight!" If it
+    sounds too good to be true, it is. Real products make realistic claims.
+    Look for language like "may help" or "supports" — not "cures" or
+    "eliminates."
+  </p>
+
+  <h2>3. No ingredient or content list</h2>
+  <p>
+    If a supplement will not tell you what is in it, do not buy it. You have
+    a right to know what you are putting in your body. Same for digital
+    products — if they will not tell you what you actually get, skip it.
+  </p>
+
+  <h2>4. Fake countdown timers</h2>
+  <p>
+    "Only 3 left at this price!" "Offer expires in 10 minutes!" These are
+    pressure tactics designed to make you buy before thinking. Legitimate
+    products do not need artificial urgency.
+  </p>
+
+  <h2>5. No way to contact the seller</h2>
+  <p>
+    If there is no email, no phone number, no support contact — do not buy.
+    A real company wants to hear from you if something goes wrong.
+  </p>
+
+  <h2>6. Only available from one website</h2>
+  <p>
+    If you can only buy it from one sketchy website and nowhere else, be
+    careful. Products sold through established platforms like ClickBank,
+    Amazon, or Shopify have oversight and refund policies.
+  </p>
+
+  <h2>7. No real reviews</h2>
+  <p>
+    Check for independent reviews — not just testimonials on the sales page.
+    Search "[product name] review" on Google and YouTube. If all you find
+    are affiliate reviews that all say the same thing, be cautious.
   </p>
 
   <div class="callout">
-    <strong>Reality check:</strong> This takes 3-6 months of consistent work.
-    If you need $5 today, sell something on eBay. If you want to build a
-    system that pays $5/day passively, read on.
+    <strong>The golden rule:</strong> If a product is sold through ClickBank,
+    it comes with a 60-day money-back guarantee. That does not mean every
+    ClickBank product is great — but it means you can get your money back if
+    it is not. Always use the guarantee.
   </div>
 
-  <h2>The math of $5/day</h2>
-  <p>
-    $5/day with affiliate marketing means:
-  </p>
-  <ul>
-    <li>One $50 commission every 10 days (1 sale per 10 days)</li>
-    <li>Or one $15 commission every 3 days</li>
-    <li>At a 2% conversion rate, you need ~250 visitors/day to your affiliate link</li>
-    <li>At a 5% click-through rate, you need ~5,000 page views/month</li>
-  </ul>
-  <p>
-    5,000 monthly page views is achievable with 20-30 SEO articles in a single
-    niche. Not easy, not fast, but doable.
-  </p>
-
-  <h2>Step 1: Pick a niche with products that pay $50+ per sale</h2>
-  <p>
-    Health & Fitness is the easiest starting point. ClickBank has dozens of
-    offers paying $50-$200+ per sale. Check the
-    <a href="../review.html">reviews page</a> for real EPC data.
-  </p>
-
-  <h2>Step 2: Build a free site</h2>
-  <p>
-    Use GitHub Pages (like this site), Blogger, or Medium. Write 20-30 articles
-    answering real questions in your niche. Each article targets one search term.
-  </p>
-  <p>
-    Article ideas:
-  </p>
-  <ul>
-    <li>"Does [product name] actually work?" — product reviews</li>
-    <li>"Best [niche] products that actually work" — list articles</li>
-    <li>"Why [problem] happens and what to do about it" — problem-solution</li>
-    <li>"[product A] vs [product B]" — comparisons</li>
-  </ul>
-
-  <h2>Step 3: Get free traffic</h2>
-  <p>
-    Read the full <a href="../guide.html">traffic guide</a>, but the short version:
-  </p>
+  <h2>What to do if you get scammed</h2>
   <ol>
-    <li>Publish 2-3 articles per week (consistency beats quality)</li>
-    <li>Create 1 YouTube video per week (screen recording + honest review)</li>
-    <li>Pin each article on Pinterest (3-5 pins per day)</li>
-    <li>Answer questions in 2-3 niche forums (link only when relevant)</li>
+    <li>Contact the seller directly and request a refund.</li>
+    <li>If no response, contact ClickBank (or the platform) for a refund.</li>
+    <li>If paid by credit card, dispute the charge with your bank.</li>
+    <li>Report the product on consumer protection websites.</li>
   </ol>
 
-  <h2>Step 4: The 6-month timeline</h2>
-  <table>
-    <tr><th>Month 1-2</th><td>Write 15 articles. Traffic: near zero. No sales. Normal.</td></tr>
-    <tr><th>Month 3-4</th><td>Google indexes your site. 10-30 visitors/day. Maybe first sale.</td></tr>
-    <tr><th>Month 5-6</th><td>30-80 visitors/day. 1-2 sales/week. ~$5/day average.</td></tr>
-    <tr><th>Month 7-12</th><td>Compounding. $5-20/day if you stayed consistent.</td></tr>
-  </table>
+  <p>Check our <a href="../review.html">honest product reviews</a> before buying.</p>
 
-  <h2>What kills $5/day</h2>
-  <ul>
-    <li><strong>Quitting in month 2.</strong> The graph is flat, then it curves. Most people quit before the curve.</li>
-    <li><strong>Switching niches.</strong> Every switch resets the clock to month 1.</li>
-    <li><strong>Picking bad offers.</strong> High commission + zero EPC = no sales. Always check EPC.</li>
-    <li><strong>Expecting passive immediately.</strong> Month 1-4 is active work. Passive comes after.</li>
-  </ul>
-
-  <h2>The boring truth</h2>
-  <p>
-    $5/day is not exciting. It's not a "laptop lifestyle" Instagram post. It's
-    boring, slow, and unglamorous. But it's real, it compounds, and it's the
-    foundation for $10/day, $20/day, and beyond. Start here.
-  </p>
-
-  <p><a href="../review.html" class="btn">Find offers to promote 💪</a></p>""",
+  <p><a href="../review.html" class="btn">See honest reviews 💪</a></p>""",
     },
     {
-        "slug": "how-to-get-free-traffic-for-affiliate-links",
-        "title": "How to Get Free Traffic for Affiliate Links (9 Methods That Work)",
-        "meta_desc": "9 free traffic methods for affiliate marketing. No paid ads. SEO, YouTube, Pinterest, forums, and more. Real timelines and effort required.",
-        "keywords": "free traffic affiliate links, affiliate marketing traffic free, get clicks affiliate, free traffic methods, SEO traffic affiliate",
+        "slug": "how-to-use-money-back-guarantee",
+        "title": "How to Use a Money-Back Guarantee (And Actually Get Your Refund)",
+        "meta_desc": "Bought a product that did not work? Here is exactly how to get your money back using the 60-day guarantee. Step by step.",
+        "keywords": "money back guarantee, how to get refund, clickbank refund, product refund, get money back online",
         "content": """  <p>
-    You have affiliate links. Nobody's clicking them. Here are 9 free methods
-    to get real eyes on your links — no paid ads, no shortcuts, no garbage.
+    Every product we review comes with a 60-day money-back guarantee. But
+    many people never use it — they feel awkward asking for a refund, or they
+    do not know how. Here is exactly how to get your money back, step by step.
   </p>
 
-  <h2>1. SEO blog content (the main path)</h2>
+  <h2>Why the guarantee matters</h2>
   <p>
-    Write articles answering questions people search for. Google sends free
-    traffic to pages that answer questions better than the competition. This
-    is what this entire site does. 2-3 articles per week for 6 months.
+    The 60-day money-back guarantee is your safety net. It means you can try
+    any product risk-free. If it does not work for you, you get a full refund.
+    No questions asked. This is enforced by ClickBank, not the seller — so
+    the seller cannot refuse.
   </p>
 
-  <h2>2. YouTube review videos</h2>
+  <h2>Step 1: Try the product properly</h2>
   <p>
-    A 5-minute honest review ranks faster than a blog post because YouTube has
-    less competition in most niches. Screen-record the product, talk honestly,
-    put your link in the description. 1 video per week.
+    Give the product a real chance. Use it as directed for at least 2-3 weeks.
+    Supplements need time to work. Digital products need time to follow. Do not
+    refund on day 1 — give it a fair shot.
   </p>
 
-  <h2>3. Pinterest pins</h2>
+  <h2>Step 2: Decide if it worked</h2>
   <p>
-    Pinterest is a search engine, not social media. Pins live for months. Create
-    simple pins in Canva (free), link to your review page, pin 3-5 per day.
-    Works best for health, fitness, and lifestyle niches.
+    After 2-3 weeks, ask yourself: Is this solving my problem? If yes, great —
+    keep it. If not, move to step 3.
   </p>
 
-  <h2>4. Reddit (carefully)</h2>
+  <h2>Step 3: Request a refund</h2>
   <p>
-    Find subreddits in your niche. Answer questions honestly for 2-3 weeks
-    without linking anything. After you build trust, link your reviews when
-    genuinely relevant. Never spam — Reddit bans fast.
+    Go to the email you received when you bought the product. Look for your
+    ClickBank order number (it starts with #). Then:
   </p>
+  <ol>
+    <li>Go to <a href="https://www.clkbank.com">clkbank.com</a> (ClickBank customer service)</li>
+    <li>Enter your order number and email</li>
+    <li>Select "Request a refund"</li>
+    <li>Choose your reason (e.g. "Product did not meet expectations")</li>
+    <li>Submit</li>
+  </ol>
 
-  <h2>5. Quora answers</h2>
+  <h2>Step 4: Wait for your refund</h2>
   <p>
-    Answer questions in your niche on Quora. Link to your review when it's
-    genuinely the answer. Quora answers rank on Google and drive traffic for
-    years. 1-2 answers per week.
-  </p>
-
-  <h2>6. Forum participation</h2>
-  <p>
-    Find 2-3 active forums in your niche. Be helpful. After 2-3 weeks, link your
-    reviews when relevant. Old forums still get search traffic.
-  </p>
-
-  <h2>7. Email newsletter</h2>
-  <p>
-    Collect emails on your site (free with Substack or ConvertKit free tier).
-    Send a weekly email with your latest review or article. Email traffic
-    converts 3-5x better than search traffic.
-  </p>
-
-  <h2>8. Guest posting</h2>
-  <p>
-    Write articles for other blogs in your niche. Include one link back to your
-    site. Free backlink + free traffic. Reach out to small/medium blogs — they
-    usually say yes to free content.
-  </p>
-
-  <h2>9. Repurpose content</h2>
-  <p>
-    Turn one article into: a YouTube video script, a Pinterest pin, a Twitter
-    thread, a Quora answer, and an email. One piece of content, 5 channels.
-    Don't create more — repurpose more.
+    ClickBank processes refunds within 1-5 business days. The money goes back
+    to your original payment method (credit card, PayPal, etc). You do not
+    need to return anything — digital products do not need to be shipped back.
   </p>
 
   <div class="callout">
-    <strong>The rule:</strong> Pick ONE method. Do it consistently for 3 months.
-    Don't add a second method until the first one produces traffic. Focus
-    beats variety every single time.
+    <strong>Important:</strong> You have 60 days from the date of purchase
+    to request a refund. After 60 days, the guarantee expires. Mark the date
+    when you buy so you do not forget.
   </div>
 
-  <p>For the full version, read the <a href="../guide.html">complete traffic guide</a>.</p>
+  <h2>What if the seller refuses?</h2>
+  <p>
+    They cannot. The guarantee is enforced by ClickBank, not the individual
+    seller. If you have trouble, contact ClickBank directly through clkbank.com
+    or by phone. They will process the refund regardless of what the seller says.
+  </p>
 
-  <p><a href="../review.html" class="btn">Find offers to promote 💪</a></p>""",
+  <h2>The bottom line</h2>
+  <p>
+    Never feel guilty about using a money-back guarantee. That is what it is
+    there for. If a product does not work for you, get your money back and try
+    something else. Check our <a href="../review.html">product reviews</a> to
+    find products worth trying.
+  </p>
+
+  <p><a href="../review.html" class="btn">Find products worth trying 💪</a></p>""",
     },
     {
-        "slug": "affiliate-marketing-mistakes-beginners-make",
-        "title": "7 Affiliate Marketing Mistakes Beginners Make (And How to Avoid Them)",
-        "meta_desc": "The real mistakes that kill affiliate marketing beginners. No hype — just what goes wrong and how to fix it. Learn from others' failures.",
-        "keywords": "affiliate marketing mistakes, beginner affiliate mistakes, affiliate marketing tips, what not to do affiliate, affiliate marketing failure",
+        "slug": "what-to-look-for-in-product-review",
+        "title": "What to Look for in a Product Review (So You Don't Get Fooled)",
+        "meta_desc": "Not all product reviews are honest. Here is how to tell a real review from a fake one — and what to check before you buy.",
+        "keywords": "how to read product review, honest review vs fake review, what to look for in review, product review guide, spot fake review",
         "content": """  <p>
-    Most people who try affiliate marketing fail. Not because it doesn't work —
-    because they make the same 7 mistakes. Here they are, and here's how to
-    avoid each one.
+    Most product reviews online are not really reviews — they are sales
+    pages dressed up to look like reviews. Here is how to tell the difference
+    and find reviews you can actually trust.
   </p>
 
-  <h2>1. Promoting products with zero EPC data</h2>
-  <p>
-    EPC (Earnings Per Click) tells you if the offer converts. If EPC is $0 or
-    unreported, you're gambling. Always check EPC before promoting. Our
-    <a href="../review.html">reviews page</a> shows EPC for every offer.
-  </p>
-
-  <h2>2. Trying 5 niches at once</h2>
-  <p>
-    Pick one niche. Stick with it for 6 months. Niche authority compounds —
-    Google ranks sites that cover one topic deeply, not sites that cover
-    everything shallowly.
-  </p>
-
-  <h2>3. Writing sales pages, not reviews</h2>
-  <p>
-    People search "[product] review" because they want honesty, not a sales
-    pitch. Write the real strengths AND weaknesses. Honest reviews convert
-    better than hype — and they don't get penalized by Google.
-  </p>
-
-  <h2>4. Expecting results in month 1</h2>
-  <p>
-    SEO takes 3-6 months. If you quit in month 2 because there's no traffic,
-    you've wasted all your work. The traffic graph is flat for months, then
-    it curves upward. You need to survive the flat part.
-  </p>
-
-  <h2>5. Spamming links</h2>
-  <p>
-    Posting your affiliate link in forums, comments, DMs, and Facebook groups
-    gets you banned and destroys trust. Write honest content, link naturally,
-    and let the traffic come to you.
-  </p>
-
-  <h2>6. Paying for ads before free traffic works</h2>
-  <p>
-    Paid ads burn money if you don't know what converts. Get free traffic first
-    — prove the offer converts with real visitors — then consider ads. 90% of
-    beginners should never run ads.
-  </p>
-
-  <h2>7. Ignoring the product quality</h2>
-  <p>
-    If you promote garbage, people refund. Refunds claw back your commission.
-    Check the product yourself or read real reviews before promoting. Your
-    reputation is worth more than one commission.
-  </p>
-
-  <h2>The fix</h2>
-  <p>
-    Pick one niche. Pick 2-3 offers with proven EPC. Write honest reviews. Get
-    free traffic. Be patient for 6 months. That's it. The system is boring
-    because it works — the exciting "shortcuts" are the ones that fail.
-  </p>
-
-  <p><a href="../review.html" class="btn">Find quality offers 💪</a></p>""",
-    },
-    {
-        "slug": "clickbank-vs-other-affiliate-networks",
-        "title": "ClickBank vs Other Affiliate Networks (Which Is Best for Beginners?)",
-        "meta_desc": "Honest comparison of ClickBank, Amazon Associates, ShareASale, and CJ. Commission rates, ease of use, and which is best for beginners.",
-        "keywords": "clickbank vs amazon associates, best affiliate network, clickbank vs shareasale, affiliate network comparison, clickbank vs cj",
-        "content": """  <p>
-    ClickBank isn't the only affiliate network. Here's how it compares to the
-    others — and which one beginners should start with.
-  </p>
-
-  <h2>ClickBank</h2>
-  <table>
-    <tr><th>Commission</th><td>40-75% (often $50-$200+ per sale)</td></tr>
-    <tr><th>Products</th><td>Mostly digital (ebooks, courses, supplements)</td></tr>
-    <tr><th>Approval</th><td>Most offers instant, some require vendor approval</td></tr>
-    <tr><th>Best for</th><td>Digital products, health supplements, self-help</td></tr>
-  </table>
-  <p>
-    <strong>Verdict:</strong> Best for beginners. High commissions, easy signup,
-    lots of data (EPC, gravity) to pick good offers. Check our
-    <a href="../review.html">reviews</a> for top picks.
-  </p>
-
-  <h2>Amazon Associates</h2>
-  <table>
-    <tr><th>Commission</th><td>1-10% (usually $1-$10 per sale)</td></tr>
-    <tr><th>Products</th><td>Physical products (everything Amazon sells)</td></tr>
-    <tr><th>Approval</th><td>Easy signup, but strict rules</td></tr>
-    <tr><th>Best for</th><td>Product review sites, gadget blogs</td></tr>
-  </table>
-  <p>
-    <strong>Verdict:</strong> Low commissions but huge product range. Good if
-    you already review physical products. Not the best for earning $5/day
-    quickly — you need massive volume.
-  </p>
-
-  <h2>ShareASale</h2>
-  <table>
-    <tr><th>Commission</th><td>Varies by merchant ($5-$100+ per sale)</td></tr>
-    <tr><th>Products</th><td>Mix of physical and digital, established brands</td></tr>
-    <tr><th>Approval</th><td>Each merchant approves separately</td></tr>
-    <tr><th>Best for</th><td>Fashion, home, lifestyle niches</td></tr>
-  </table>
-  <p>
-    <strong>Verdict:</strong> Good for physical product niches. More approval
-    friction than ClickBank but often higher quality merchants.
-  </p>
-
-  <h2>CJ Affiliate (Commission Junction)</h2>
-  <table>
-    <tr><th>Commission</th><td>Varies by advertiser</td></tr>
-    <tr><th>Products</th><td>Big brands (Gap, Lowe's, etc.)</td></tr>
-    <tr><th>Approval</th><td>Strict — each advertiser approves separately</td></tr>
-    <tr><th>Best for</th><td>Established sites with existing traffic</td></tr>
-  </table>
-  <p>
-    <strong>Verdict:</strong> Not for beginners. Need existing traffic to get
-    approved by good advertisers. Come back to this after you have 1,000+
-    monthly visitors.
-  </p>
-
-  <h2>Which should you start with?</h2>
-  <p>
-    <strong>ClickBank.</strong> It's the easiest to start, has the highest
-    commissions for beginners, and gives you data (EPC, gravity) to pick offers
-    that actually convert. Once you have traffic, add Amazon Associates or
-    ShareASale for complementary products.
-  </p>
-
-  <p>Start with our <a href="../review.html">ClickBank offer reviews</a> and the <a href="../guide.html">traffic guide</a>.</p>
-
-  <p><a href="../review.html" class="btn">See top ClickBank offers 💪</a></p>""",
-    },
-    {
-        "slug": "what-is-epc-and-why-it-matters-affiliate",
-        "title": "What Is EPC in Affiliate Marketing? (And Why It's the Only Number That Matters)",
-        "meta_desc": "EPC explained simply. What it means, how to use it, and why it's more important than commission rate. Real ClickBank examples.",
-        "keywords": "what is epc affiliate, epc meaning, earnings per click, affiliate epc explained, clickbank epc, epc vs commission",
-        "content": """  <p>
-    If you only learn one metric in affiliate marketing, make it EPC. Here's
-    what it means, why it matters more than commission, and how to use it.
-  </p>
-
-  <h2>What is EPC?</h2>
-  <p>
-    EPC = Earnings Per Click. It's the average amount affiliates earn every time
-    someone clicks their affiliate link. If EPC is $5, that means for every 100
-    clicks, affiliates earn $500 on average.
-  </p>
-
-  <h2>Why EPC beats commission</h2>
-  <p>
-    Two offers on ClickBank:
-  </p>
+  <h2>Signs of a fake review</h2>
   <ul>
-    <li>Offer A: $500 commission, $0.50 EPC</li>
-    <li>Offer B: $50 commission, $5 EPC</li>
+    <li><strong>Only lists pros, no cons.</strong> Every product has downsides. If a review lists zero cons, it is a sales page.</li>
+    <li><strong>Uses the exact same language as the sales page.</strong> If the review copies the product's marketing copy, it is not independent.</li>
+    <li><strong>Pushes you to buy immediately.</strong> "Buy now before the price goes up!" is not a review — it is a sales pitch.</li>
+    <li><strong>No personal experience.</strong> "This product is amazing!" with no explanation of why is worthless.</li>
+    <li><strong>10/10 rating with no caveats.</strong> Nothing is perfect. A 10/10 review is suspicious.</li>
   </ul>
-  <p>
-    Offer A sounds better ($500!), but the EPC tells the truth. At $0.50 EPC,
-    you need 1,000 clicks to make $500. At $5 EPC, you need 100 clicks to make
-    $500. Offer B is 10x better despite paying 10x less per sale.
-  </p>
-  <p>
-    EPC accounts for conversion rate. High commission + bad conversion = low EPC.
-    Low commission + great conversion = high EPC. Always follow the EPC.
-  </p>
 
-  <h2>How to use EPC</h2>
+  <h2>Signs of an honest review</h2>
+  <ul>
+    <li><strong>Lists both pros AND cons.</strong> Real reviews tell you what is good AND what is bad.</li>
+    <li><strong>Says "it depends."</strong> Honest reviews acknowledge that products work differently for different people.</li>
+    <li><strong>Mentions the money-back guarantee.</strong> Reviews that remind you about the guarantee are looking out for you, not just selling.</li>
+    <li><strong>Admits limitations.</strong> "This product has limited data" or "I have not tested this personally" are signs of honesty.</li>
+    <li><strong>Does not push you to buy immediately.</strong> Honest reviews give you information and let you decide.</li>
+  </ul>
+
+  <h2>What to check before buying</h2>
   <ol>
-    <li>Filter ClickBank offers by EPC (our <a href="../review.html">reviews page</a> shows EPC for every offer).</li>
-    <li>Pick offers with EPC above $3 — these are proven to convert.</li>
-    <li>Be cautious of offers with $0 EPC — they're unproven or don't convert.</li>
-    <li>Compare EPC across offers in the same niche to find the best one.</li>
+    <li><strong>Read multiple reviews.</strong> Do not rely on one review. Check 2-3 different sources.</li>
+    <li><strong>Check YouTube.</strong> Video reviews show the actual product — harder to fake.</li>
+    <li><strong>Look for the money-back guarantee.</strong> If it has one, you can try it risk-free.</li>
+    <li><strong>Search for complaints.</strong> Search "[product name] complaint" or "[product name] refund" to see if people have trouble.</li>
+    <li><strong>Trust your gut.</strong> If something feels off, do not buy. There are always other options.</li>
   </ol>
-
-  <h2>What's a good EPC?</h2>
-  <table>
-    <tr><th>EPC Range</th><th>What It Means</th></tr>
-    <tr><td>$0 or unreported</td><td>Unproven. Don't promote unless you have a specific reason.</td></tr>
-    <tr><td>$0.01 - $1</td><td>Low conversion. Might work with highly targeted traffic.</td></tr>
-    <tr><td>$1 - $3</td><td>Decent. Worth testing.</td></tr>
-    <tr><td>$3 - $10</td><td>Good. Proven conversion. Safe to promote.</td></tr>
-    <tr><td>$10+</td><td>Excellent. High-converting offer with strong commission.</td></tr>
-  </table>
 
   <div class="callout">
-    <strong>Important:</strong> EPC is an average across all affiliates. Your
-    EPC depends on your traffic quality. Someone with a targeted email list
-    will have higher EPC than someone with random social media traffic. The
-    marketplace EPC is a baseline, not a guarantee.
+    <strong>Our reviews:</strong> Every review on our site lists pros AND cons.
+    We never rate a product 10/10. We always mention the 60-day money-back
+    guarantee. And we tell you when we do not have enough data to make a
+    confident recommendation.
   </div>
 
-  <h2>EPC is your traffic ROI</h2>
-  <p>
-    If you send 1,000 visitors to an offer with $5 EPC, you expect ~$5,000 in
-    affiliate earnings. That's your return on 1,000 visitors. Use EPC to decide
-    which offers deserve your traffic.
-  </p>
+  <p>Read our <a href="../review.html">honest product reviews</a> — they follow these principles.</p>
 
-  <p>
-    Check the <a href="../review.html">reviews page</a> for live EPC data on
-    every top ClickBank offer.
-  </p>
-
-  <p><a href="../review.html" class="btn">Compare EPC data 💪</a></p>""",
+  <p><a href="../review.html" class="btn">See honest reviews 💪</a></p>""",
     },
     {
-        "slug": "how-to-write-affiliate-review-that-ranks",
-        "title": "How to Write an Affiliate Review That Actually Ranks on Google",
-        "meta_desc": "Step-by-step guide to writing affiliate reviews that rank on Google and convert readers into buyers. Real structure, real examples, no fluff.",
-        "keywords": "how to write affiliate review, affiliate review template, write product review SEO, affiliate review that ranks, review article structure",
+        "slug": "best-products-for-joint-pain-2026",
+        "title": "Best Products for Joint Pain in 2026 (What Actually Works)",
+        "meta_desc": "Which joint pain products actually help? Honest review of the top options, what to look for, and what to avoid. Real guidance for buyers.",
+        "keywords": "best joint pain product, joint pain relief, joint supplement review, arthritis relief, joint pain what works",
         "content": """  <p>
-    Writing an affiliate review that ranks on Google isn't about being a great
-    writer. It's about structure, honesty, and giving Google what it wants.
-    Here's the exact structure that works.
+    Joint pain affects millions of people. If you are dealing with it, you
+    want relief — but there are hundreds of products claiming to help. Here
+    is what actually works, what to look for, and what to avoid.
   </p>
 
-  <h2>The structure</h2>
-  <ol>
-    <li><strong>Title:</strong> "[Product Name] Review — Does It Actually Work?" This targets the exact search term people type.</li>
-    <li><strong>Intro (100 words):</strong> State what the product is and that you'll give an honest review. No hype.</li>
-    <li><strong>What it is (150 words):</strong> Describe the product plainly. What does it do? Who is it for?</li>
-    <li><strong>The numbers (table):</strong> Commission, EPC, gravity. Real data from ClickBank.</li>
-    <li><strong>Strengths (bullet list):</strong> 3-5 honest strengths based on the data.</li>
-    <li><strong>Weaknesses (bullet list):</strong> 3-5 honest weaknesses. This is what makes Google trust you.</li>
-    <li><strong>Verdict (100 words):</strong> Should you promote it? Straight answer.</li>
-    <li><strong>How to promote it (150 words):</strong> Link to your traffic guide.</li>
-    <li><strong>CTA button:</strong> Your affiliate link.</li>
-  </ol>
-
-  <h2>Why this works</h2>
+  <h2>What causes joint pain?</h2>
   <p>
-    Google's algorithm rewards pages that answer questions honestly. The
-    weaknesses section is what separates your review from the 50 other
-    "reviews" that are just sales pages. Google can tell the difference —
-    and so can readers.
+    Joint pain can come from arthritis, aging, injury, inflammation, or
+    overuse. The right product depends on the cause. A supplement that helps
+    with inflammation might not help with structural joint damage. Know your
+    problem before you buy.
   </p>
+
+  <h2>What to look for in a joint product</h2>
+  <ul>
+    <li><strong>Anti-inflammatory ingredients.</strong> Look for turmeric, glucosamine, chondroitin, or omega-3s.</li>
+    <li><strong>Clinical backing.</strong> The product should cite studies or use clinically tested ingredients.</li>
+    <li><strong>Money-back guarantee.</strong> Always buy products with a 60-day guarantee so you can try them risk-free.</li>
+    <li><strong>Real customer feedback.</strong> Check independent reviews, not just the sales page testimonials.</li>
+  </ul>
 
   <h2>What to avoid</h2>
   <ul>
-    <li>Don't copy the vendor's sales page. Google penalizes duplicate content.</li>
-    <li>Don't write 3000 words of fluff. 800-1500 words of substance beats 3000 of padding.</li>
-    <li>Don't hide your affiliate link. Put it naturally where the product is mentioned.</li>
-    <li>Don't forget the weaknesses. If you only list strengths, Google sees it as promotional, not helpful.</li>
+    <li>Products that claim to "cure" arthritis — there is no cure, only management.</li>
+    <li>Products with no ingredient list.</li>
+    <li>Products with no money-back guarantee.</li>
+    <li>Products that promise instant relief — joint health takes weeks to months.</li>
   </ul>
 
-  <p>See real examples on our <a href="../review.html">reviews page</a> — every one follows this structure.</p>
+  <h2>Our top pick for joint pain</h2>
+  <p>
+    We reviewed several joint pain products. Our top pick is
+    <a href="../reviews/amp-joint-10-joint-support-offer-240-cpa.html">AMP Joint 10</a>
+    — it has strong buyer signals, a 60-day guarantee, and is designed for
+    joint support. Read the full review to see if it is right for you.
+  </p>
 
-  <p><a href="../review.html" class="btn">See real review examples 💪</a></p>""",
+  <p><a href="../reviews/amp-joint-10-joint-support-offer-240-cpa.html" class="btn">Read AMP Joint 10 review 💪</a></p>""",
     },
     {
-        "slug": "what-is-gravity-score-clickbank-explained",
-        "title": "What Is Gravity Score on ClickBank? (Simple Explanation for Beginners)",
-        "meta_desc": "ClickBank gravity score explained simply. What it means, what a good gravity score is, and why it matters for choosing affiliate offers.",
-        "keywords": "what is gravity score clickbank, clickbank gravity explained, gravity score meaning, good gravity score clickbank, affiliate gravity",
+        "slug": "best-products-for-sleep-2026",
+        "title": "Best Products for Better Sleep in 2026 (What Actually Works)",
+        "meta_desc": "Which sleep products actually help you sleep better? Honest review of top options, what to look for, and what to avoid.",
+        "keywords": "best sleep product, sleep aid review, better sleep, natural sleep aid, what helps you sleep",
         "content": """  <p>
-    Gravity is one of the most confusing numbers on ClickBank. Here's the
-    simple explanation — no jargon, no math.
+    Not sleeping well? You are not alone. Millions of people struggle with
+    sleep. Here is what actually works, what to look for in a sleep product,
+    and what to avoid.
   </p>
 
-  <h2>What gravity means</h2>
+  <h2>What causes poor sleep?</h2>
   <p>
-    Gravity = how many different affiliates earned a commission on this
-    product in the last 12 weeks. Higher gravity means more affiliates are
-    making money with it.
+    Poor sleep can come from stress, anxiety, screen time, caffeine, irregular
+    schedule, or underlying health issues. The right product depends on the
+    cause. A supplement will not fix a terrible sleep schedule.
   </p>
 
-  <h2>What's a good gravity score?</h2>
-  <table>
-    <tr><th>Gravity</th><th>What It Means</th></tr>
-    <tr><td>0</td><td>No affiliates earning. Unproven or dead.</td></tr>
-    <tr><td>1-20</td><td>Low traction. Few affiliates testing it. Higher risk, less competition.</td></tr>
-    <tr><td>20-100</td><td>Solid. Many affiliates earning consistently. Safe to promote.</td></tr>
-    <tr><td>100-300</td><td>Hot. Very popular offer. Proven to convert, but more competition.</td></tr>
-    <tr><td>300+</td><td>Saturated. Lots of affiliates promoting it. Harder to stand out.</td></tr>
-  </table>
-
-  <h2>High vs low gravity — which is better?</h2>
-  <p>
-    It depends on your strategy:
-  </p>
+  <h2>What to look for in a sleep product</h2>
   <ul>
-    <li><strong>High gravity (100+):</strong> Proven to convert. Many affiliates earn. But you compete with all of them. Good for beginners — the offer works, you just need traffic.</li>
-    <li><strong>Low gravity (10-50):</strong> Less competition. If the EPC is good, this can be a hidden gem. Riskier but potentially more profitable per click.</li>
-    <li><strong>Zero gravity:</strong> Avoid unless you have a specific reason. No data means no proof.</li>
+    <li><strong>Natural ingredients.</strong> Look for melatonin, magnesium, valerian root, or L-theanine.</li>
+    <li><strong>No dependency risk.</strong> Avoid products that make you dependent on them to sleep.</li>
+    <li><strong>Money-back guarantee.</strong> Always buy with a 60-day guarantee.</li>
+    <li><strong>Clear dosage instructions.</strong> You should know exactly how much to take and when.</li>
   </ul>
-
-  <h2>Gravity + EPC = the winning combo</h2>
-  <p>
-    Gravity alone isn't enough. An offer with gravity 500 but EPC $0.10 is
-    worse than gravity 30 with EPC $5. Always check both numbers together.
-    Our <a href="../review.html">reviews page</a> shows both for every offer.
-  </p>
-
-  <div class="callout">
-    <strong>Important:</strong> Gravity is weighted — more recent sales count
-    more. So gravity 50 means ~50 affiliates earned recently, not 12 weeks ago.
-    It's a freshness indicator, not a lifetime total.
-  </div>
-
-  <p><a href="../review.html" class="btn">Compare gravity scores 💪</a></p>""",
-    },
-    {
-        "slug": "affiliate-marketing-without-website",
-        "title": "Can You Do Affiliate Marketing Without a Website? (Honest Answer)",
-        "meta_desc": "Can you earn with affiliate marketing without a website? Yes, but there are trade-offs. Real methods, real limitations, no hype.",
-        "keywords": "affiliate marketing without website, no website affiliate, affiliate marketing free, affiliate without site, earn money affiliate no website",
-        "content": """  <p>
-    Short answer: Yes, you can do affiliate marketing without a website. But
-    it's harder, less stable, and limits your options. Here's the honest
-    breakdown.
-  </p>
-
-  <h2>Methods that work without a website</h2>
-
-  <h3>1. YouTube</h3>
-  <p>
-    Put your affiliate link in the video description. YouTube is the second
-    largest search engine — videos rank fast. This is the best no-website
-    method. You can do it faceless with screen recordings and AI voiceover.
-  </p>
-
-  <h3>2. Pinterest</h3>
-  <p>
-    Pin images with your affiliate link directly. Pinterest allows affiliate
-    links. Works best for visual niches (health, fitness, lifestyle).
-  </p>
-
-  <h3>3. Medium.com</h3>
-  <p>
-    Write articles on Medium with your affiliate link. Medium has built-in
-    traffic and domain authority. But you don't own the platform — they can
-    change rules anytime.
-  </p>
-
-  <h3>4. Quora</h3>
-  <p>
-    Answer questions and link to your affiliate offer when relevant. Don't
-    spam — Quora bans fast. But one good answer can drive traffic for years.
-  </p>
-
-  <h3>5. Email list</h3>
-  <p>
-    Use a free email tool (Substack, ConvertKit free tier). Send affiliate
-    offers to your list. But you need a way to collect emails first — usually
-    a website or social media.
-  </p>
-
-  <h2>Why a website is still better</h2>
-  <ul>
-    <li><strong>You own it.</strong> YouTube, Medium, and Quora can ban you or change rules. Your website is yours.</li>
-    <li><strong>SEO compounds.</strong> Blog posts rank higher over time. Social media posts decay.</li>
-    <li><strong>Multiple offers.</strong> One website can promote 20 products in one niche. Social media limits you to one link per post.</li>
-    <li><strong>Email capture.</strong> Websites let you build an email list. Email converts 3-5x better than any other traffic.</li>
-  </ul>
-
-  <h2>The honest recommendation</h2>
-  <p>
-    Start without a website if you must (YouTube + Pinterest). But set up a
-    free GitHub Pages or Blogger site as soon as possible. A website is the
-    foundation — everything else is traffic that points to it.
-  </p>
-  <p>
-    This entire site runs on <a href="../index.html">GitHub Pages</a> — free,
-    no coding experience needed to start. Read the
-    <a href="start-affiliate-marketing-no-money.html">beginner's guide</a>
-    for the full setup.
-  </p>
-
-  <p><a href="../guide.html" class="btn">Learn free traffic methods 💪</a></p>""",
-    },
-    {
-        "slug": "best-health-supplements-to-promote-2026",
-        "title": "Best Health Supplements to Promote as an Affiliate in 2026",
-        "meta_desc": "Top health supplement affiliate offers on ClickBank. Real EPC, commission, and gravity data. Which niches pay best and convert easiest.",
-        "keywords": "best health supplements affiliate, supplement affiliate programs, health niche clickbank, top supplement offers 2026, affiliate health products",
-        "content": """  <p>
-    Health & Fitness is the highest-paying niche on ClickBank. But not every
-    supplement offer is worth promoting. Here's how to pick the right ones,
-    with real data.
-  </p>
-
-  <div class="callout">
-    <strong>Why health?</strong> Evergreen demand (everyone wants to be
-    healthy), high commissions ($50-$200+ per sale), and emotional buying
-    (people buy supplements to solve real problems). It's the best starting
-    niche for new affiliates.
-  </div>
-
-  <h2>The best health sub-niches</h2>
-
-  <h3>Sleep</h3>
-  <p>
-    Sleep problems affect billions of people. Products like YU SLEEP pay $140+
-    per sale. Evergreen — people always have trouble sleeping.
-  </p>
-
-  <h3>Joint pain</h3>
-  <p>
-    Aging population = growing market. Offers like AMP Joint 10 pay $230+
-    per sale with proven EPC. Less competition than weight loss.
-  </p>
-
-  <h3>Weight loss</h3>
-  <p>
-    The biggest health niche. High competition but massive search volume.
-    Products like Metabo Drops and Venus Factor pay $200+ per sale.
-  </p>
-
-  <h3>Dental health</h3>
-  <p>
-    Emerging niche with less competition. DentalPrime and Dentolyn are new
-    offers with high EPC. Get in early before saturation.
-  </p>
-
-  <h3>Blood sugar / circulation</h3>
-  <p>
-    Growing market. BloodArmor and similar offers pay well. High emotional
-    urgency — people with blood sugar issues buy fast.
-  </p>
-
-  <h2>How to choose</h2>
-  <ol>
-    <li>Pick ONE sub-niche (sleep, joints, weight loss — pick one).</li>
-    <li>Check EPC on our <a href="../review.html">reviews page</a> — only promote offers with EPC above $3.</li>
-    <li>Check gravity — 20+ means it's proven.</li>
-    <li>Pick 2-3 offers in that sub-niche and write honest reviews for each.</li>
-  </ol>
 
   <h2>What to avoid</h2>
   <ul>
-    <li>Offers with $0 EPC — no proof they convert.</li>
-    <li>Offers with gravity 0 — nobody's earning from them.</li>
-    <li>Products with ridiculous claims — high refund rates kill your commission.</li>
-    <li>Promoting 5 sub-niches at once — pick one and go deep.</li>
+    <li>Products that promise "instant" sleep — good sleep habits take time.</li>
+    <li>Products with proprietary blends that do not list amounts.</li>
+    <li>Products with no money-back guarantee.</li>
+    <li>Anything that makes you groggy the next morning.</li>
   </ul>
 
-  <p>See the top health offers with real data on our <a href="../review.html">reviews page</a>.</p>
-
-  <p><a href="../review.html" class="btn">Compare health offers 💪</a></p>""",
-    },
-    {
-        "slug": "how-long-does-affiliate-marketing-take",
-        "title": "How Long Does Affiliate Marketing Take to Earn Money? (Real Timeline)",
-        "meta_desc": "Honest timeline for affiliate marketing. When will you earn your first dollar? First $5/day? No fake promises — just the real numbers.",
-        "keywords": "how long affiliate marketing take, affiliate marketing timeline, when do you earn affiliate, how fast affiliate marketing, affiliate marketing results",
-        "content": """  <p>
-    Everyone wants to know: "How long until I earn money?" Here's the honest
-    answer, based on what's publicly known — not fake promises.
-  </p>
-
-  <h2>The short answer</h2>
-  <p>
-    First sale: 2-4 months. Consistent income ($5/day): 4-8 months. Full
-    replacement income: 12-24 months. These are estimates, not guarantees —
-    your results depend on effort, niche, and consistency.
-  </p>
-
-  <h2>The real timeline</h2>
-  <table>
-    <tr><th>Timeframe</th><th>What happens</th><th>Traffic</th><th>Earnings</th></tr>
-    <tr><td>Month 1</td><td>You build the site, write 10-15 articles</td><td>Near zero</td><td>$0</td></tr>
-    <tr><td>Month 2</td><td>Google starts indexing your pages</td><td>5-20/day</td><td>$0 (maybe first click)</td></tr>
-    <tr><td>Month 3</td><td>Some pages start ranking</td><td>20-50/day</td><td>Maybe first sale ($50-100)</td></tr>
-    <tr><td>Month 4-6</td><td>Compounding content + rankings</td><td>50-150/day</td><td>$1-5/day if consistent</td></tr>
-    <tr><td>Month 6-12</td><td>Authority building, Google trusts site</td><td>100-300/day</td><td>$5-20/day</td></tr>
-    <tr><td>Year 2</td><td>Compounding effect kicks in fully</td><td>300-1000+/day</td><td>$20-50+/day</td></tr>
-  </table>
-
-  <h2>What determines your speed</h2>
-  <ul>
-    <li><strong>Consistency:</strong> 2-3 articles per week beats 10 articles in one week then nothing for a month.</li>
-    <li><strong>Niche competition:</strong> Health & Fitness is competitive but high-volume. Less competitive niches rank faster but pay less.</li>
-    <li><strong>Content quality:</strong> Honest reviews with real data rank better than generic 500-word fluff.</li>
-    <li><strong>Offer choice:</strong> High EPC offers earn faster. Low EPC means you need more traffic to see the same income.</li>
-    <li><strong>Traffic method:</strong> YouTube is faster than SEO. Pinterest is faster than SEO but slower than YouTube.</li>
-  </ul>
-
-  <h2>Why most people quit before earning</h2>
-  <p>
-    The graph is flat for 2-3 months. No traffic, no sales, nothing. This is
-    where 90% of people quit. Then between month 3-4, the graph starts
-    curving upward. The people who earn are the ones who survived the flat
-    part.
-  </p>
-
-  <div class="callout">
-    <strong>The brutal truth:</strong> If you write 15 articles and quit in
-    month 2, you earn $0. If you write 50 articles over 6 months, you could
-    earn $5-20/day. The difference is not talent, not luck, not a secret
-    method. It's just not quitting.
-  </div>
-
-  <h2>How to speed it up</h2>
+  <h2>Free things to try first</h2>
   <ol>
-    <li>Add YouTube — videos rank in weeks, not months.</li>
-    <li>Add Pinterest — pins drive traffic while you wait for SEO.</li>
-    <li>Pick high-EPC offers so each click is worth more.</li>
-    <li>Target long-tail keywords (longer, specific search terms with less competition).</li>
+    <li>Turn off screens 1 hour before bed.</li>
+    <li>Keep your bedroom cool and dark.</li>
+    <li>Stop caffeine after 2 PM.</li>
+    <li>Go to bed at the same time every night.</li>
+    <li>Try magnesium supplements (cheap, available anywhere).</li>
   </ol>
-
-  <p>Read the full <a href="../guide.html">traffic guide</a> and our <a href="how-to-earn-5-dollars-per-day-online.html">$5/day plan</a>.</p>
-
-  <p><a href="../review.html" class="btn">Find offers to promote 💪</a></p>""",
-    },
-    {
-        "slug": "clickbank-gravity-vs-epc-which-matters",
-        "title": "ClickBank Gravity vs EPC: Which Number Actually Matters More?",
-        "meta_desc": "Gravity vs EPC on ClickBank — which should you care about? Real comparison with examples. Stop guessing, start using the right metric.",
-        "keywords": "clickbank gravity vs epc, gravity or epc, which clickbank metric, epc vs gravity, clickbank metrics explained",
-        "content": """  <p>
-    EPC and gravity are the two numbers every ClickBank affiliate looks at.
-    But which one actually predicts whether you'll earn money? The answer
-    might surprise you.
-  </p>
-
-  <h2>The quick answer</h2>
   <p>
-    <strong>EPC matters more.</strong> Always. EPC tells you if the offer
-    converts. Gravity tells you if other people are earning. But other people
-    earning doesn't mean YOU will earn — your traffic is different from theirs.
+    If these do not work after 2 weeks, then consider a sleep product. Check
+    our <a href="../review.html">product reviews</a> for options with a
+    60-day money-back guarantee.
   </p>
 
-  <h2>What each number tells you</h2>
-  <table>
-    <tr><th>Metric</th><th>What it measures</th><th>What it predicts</th></tr>
-    <tr><td>EPC</td><td>Average earnings per click across all affiliates</td><td>How much you'll earn per click (your ROI)</td></tr>
-    <tr><td>Gravity</td><td>How many affiliates earned in the last 12 weeks</td><td>How popular/competitive the offer is</td></tr>
-  </table>
-
-  <h2>When gravity helps</h2>
-  <p>
-    Gravity is useful as a validation signal. If gravity is 100+, it confirms
-    the offer converts for many people — it's not a fluke. But it doesn't tell
-    you how MUCH you'll earn per click.
-  </p>
-
-  <h2>When EPC helps</h2>
-  <p>
-    EPC is your actual ROI predictor. If EPC is $5, you expect ~$5 per click
-    you send. If EPC is $0.50, you expect $0.50 per click. This is the number
-    that determines whether your traffic will pay off.
-  </p>
-
-  <h2>Real example</h2>
-  <ul>
-    <li>Offer A: Gravity 300, EPC $0.50, Commission $200</li>
-    <li>Offer B: Gravity 30, EPC $5, Commission $50</li>
-  </ul>
-  <p>
-    Most beginners pick Offer A (gravity 300 = "it must be good!"). But Offer B
-    earns 10x more per click. You need 1,000 clicks to make $500 on Offer A.
-    You need 100 clicks to make $500 on Offer B.
-  </p>
-
-  <h2>The winning formula</h2>
-  <ol>
-    <li><strong>Filter by EPC first:</strong> Only look at offers with EPC above $3.</li>
-    <li><strong>Then check gravity:</strong> 20+ confirms it's not a fluke.</li>
-    <li><strong>Then check commission:</strong> Higher is better, but only after EPC and gravity pass.</li>
-  </ol>
-
-  <p>Compare both numbers for every offer on our <a href="../review.html">reviews page</a>.</p>
-
-  <p><a href="../review.html" class="btn">Compare EPC and gravity 💪</a></p>""",
-    },
-    {
-        "slug": "passive-income-affiliate-marketing-truth",
-        "title": "Passive Income Affiliate Marketing: The Honest Truth Nobody Tells You",
-        "meta_desc": "Is affiliate marketing really passive income? The honest answer. What's passive, what's not, and how long it takes to get there.",
-        "keywords": "passive income affiliate marketing, affiliate marketing passive, is affiliate marketing passive income, passive income truth, affiliate income passive",
-        "content": """  <p>
-    "Passive income" is the biggest buzzword in affiliate marketing. Here's
-    the honest truth: it's partially true, but not the way most people think.
-  </p>
-
-  <h2>What IS passive</h2>
-  <ul>
-    <li><strong>Articles you already wrote:</strong> A blog post you published 6 months ago can still earn commissions today without any work.</li>
-    <li><strong>YouTube videos:</strong> A video you made once can drive clicks for years.</li>
-    <li><strong>Pinterest pins:</strong> Pins live for months and keep getting clicks.</li>
-    <li><strong>Email sequences:</strong> A pre-written email series sends offers automatically.</li>
-  </ul>
-
-  <h2>What is NOT passive</h2>
-  <ul>
-    <li><strong>Writing new content:</strong> If you stop publishing, traffic eventually plateaus and declines.</li>
-    <li><strong>Monitoring offers:</strong> ClickBank offers die, change commission rates, or get discontinued. You need to update.</li>
-    <li><strong>SEO maintenance:</strong> Google updates its algorithm. Rankings fluctuate. You need to adapt.</li>
-    <li><strong>Building traffic:</strong> The first 6 months are 100% active work with $0 return.</li>
-  </ul>
-
-  <h2>The real timeline to "passive"</h2>
-  <table>
-    <tr><th>Phase</th><th>Effort</th><th>Income</th><th>Passive?</th></tr>
-    <tr><td>Month 1-6</td><td>10-15 hrs/week</td><td>$0-5/day</td><td>No — pure active work</td></tr>
-    <tr><td>Month 6-12</td><td>5-10 hrs/week</td><td>$5-20/day</td><td>Partially — old content earns, new content needed</td></tr>
-    <tr><td>Year 2</td><td>3-5 hrs/week</td><td>$20-50+/day</td><td>Mostly — old content does most of the work</td></tr>
-    <tr><td>Year 3+</td><td>2-3 hrs/week</td><td>$50-100+/day</td><td>Yes — maintenance mode</td></tr>
-  </table>
-
-  <div class="callout">
-    <strong>The truth:</strong> Affiliate income becomes passive AFTER
-    12-24 months of active work. It's not passive from day 1. Anyone who
-    tells you otherwise is selling a course.
-  </div>
-
-  <h2>How to reach passive faster</h2>
-  <ol>
-    <li>Pick high-EPC offers so each article earns more.</li>
-    <li>Write evergreen content (reviews, guides) not news/trends.</li>
-    <li>Promote offers with recurring commissions (rebill offers).</li>
-    <li>Build an email list — email is the most passive channel.</li>
-    <li>Repurpose content (one article → video → pin → email).</li>
-  </ol>
-
-  <p>Start building with our <a href="start-affiliate-marketing-no-money.html">beginner's guide</a> and <a href="../review.html">offer reviews</a>.</p>
-
-  <p><a href="../review.html" class="btn">Start building passive income 💪</a></p>""",
+  <p><a href="../review.html" class="btn">See product reviews 💪</a></p>""",
     },
 ]
 
 
+def main():
+    parser = argparse.ArgumentParser(description="Generate SEO articles")
+    parser.add_argument("--type", choices=["review", "niche", "howto", "all"], default="all")
+    parser.add_argument("--limit", type=int, default=10, help="Max articles per type")
+    parser.add_argument("--dry-run", action="store_true")
 def main():
     parser = argparse.ArgumentParser(description="Generate SEO articles")
     parser.add_argument("--type", choices=["review", "niche", "howto", "all"], default="all")
