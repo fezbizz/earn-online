@@ -747,8 +747,15 @@ def main():
             f"  <url><loc>{BASE_URL}/review.html</loc><changefreq>daily</changefreq><priority>0.9</priority></url>",
             f"  <url><loc>{BASE_URL}/guide.html</loc><changefreq>monthly</changefreq><priority>0.6</priority></url>",
         ]
-        # Add blog articles
-        for slug in slugs_for_sitemap:
+        # Add blog articles — union of generated slugs AND any hand-added files in blog/
+        # (2026-09-17: previously only generated slugs were listed, so hand-added articles
+        # like best-ai-tools-2026-analyzed.html were silently dropped from the sitemap)
+        blog_dir = SCRIPT_DIR / "blog"
+        sitemap_slugs = set(slugs_for_sitemap)
+        if blog_dir.exists():
+            for blog_file in sorted(blog_dir.glob("*.html")):
+                sitemap_slugs.add(blog_file.stem)
+        for slug in sorted(sitemap_slugs):
             sitemap_urls.append(f"  <url><loc>{BASE_URL}/blog/{slug}.html</loc><changefreq>monthly</changefreq><priority>0.8</priority></url>")
         # Add individual product review pages
         reviews_dir = SCRIPT_DIR / "reviews"
